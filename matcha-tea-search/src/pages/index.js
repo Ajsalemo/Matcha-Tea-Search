@@ -14,6 +14,8 @@ const LandingGridContainer = styled(Grid)`
     background: url(${MatchaMainBackground}) center no-repeat;
     background-size: cover;
     height: 100vh;
+    display: flex;
+    justify-content: center;
 `;
 
 const LandingGrid = styled(Grid)`
