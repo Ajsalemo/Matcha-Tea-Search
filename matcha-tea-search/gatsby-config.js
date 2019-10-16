@@ -8,6 +8,17 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Josefin Sans`,
+            variants: [`400`, `700`]
+          }
+        ]
+      }
+    },
     `gatsby-plugin-styled-components`,
     `gatsby-theme-material-ui`
   ]

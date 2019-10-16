@@ -1,25 +1,36 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import React from 'react';
 import { Grid } from '@material-ui/core';
+import React from 'react';
 import styled from 'styled-components';
-
-// Images
+import Hero from '../components/hero';
 import MatchaMainBackground from '../images/matcha-main-background.jpg';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const LandingGrid = styled(Grid)`
-    background: url(${MatchaMainBackground}) no-repeat;
+const LandingGridContainer = styled(Grid)`
+    background: url(${MatchaMainBackground}) center no-repeat;
     background-size: cover;
     height: 100vh;
 `;
 
+const LandingGrid = styled(Grid)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
+
+// ---------------------------------------------------------------------------------- //
+
 const Landing = () => {
     return (
-        <LandingGrid container>Home</LandingGrid>
+        <LandingGridContainer container>
+            <LandingGrid item md={12}>
+                <Hero />
+            </LandingGrid>
+        </LandingGridContainer>
     );
 }
 
