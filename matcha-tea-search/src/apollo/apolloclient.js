@@ -8,6 +8,11 @@ import ApolloClient from 'apollo-boost';
 
 export const client = new ApolloClient({
   uri: '/graphql',
+  request: operation => {
+    operation.setContext({
+      authorization: `Bearer ${process.env.GATSBY_YELP_API_KEY}`
+    })
+  }
 });
 
 // ---------------------------------------------------------------------------------- //

@@ -1,10 +1,10 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { TextField, InputAdornment } from '@material-ui/core';
+import { InputAdornment, TextField } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { Search } from '@material-ui/icons';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -20,6 +20,7 @@ const SearchIcon = styled(Search)`
         cursor: pointer;
     }
 `;
+
 
 // ---------------------------------------------------------------------------------- //
 

@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   plugins: [
     {
@@ -17,6 +21,18 @@ module.exports = {
             variants: [`400`, `700`]
           }
         ]
+      }
+    },
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: 'YelpAPIQuery',
+        fieldName: 'business',
+        url: "https://api.yelp.com/v3/graphql",
+        headers: {
+          Authorization: `Bearer ${process.env.YELP_API_KEY}`,
+          "Content-Type": "application/graphql",
+        }
       }
     },
     `gatsby-plugin-styled-components`,
