@@ -32,8 +32,8 @@ const HeroGrid = styled(Grid)`
 const Hero = () => {
     return (
         <HeroGrid item sm={12} md={10}>
-            <HeroTypography variant="h1">Matcha Tea</HeroTypography>
-            <HeroTypography variant="subtitle1">Search for local Matcha and Bubble tea</HeroTypography>
+            <HeroTypography variant="h1">Matcha Finder</HeroTypography>
+            <HeroTypography variant="subtitle1">Search for local Matcha</HeroTypography>
             <SubmitForm />
         </HeroGrid>
     );
