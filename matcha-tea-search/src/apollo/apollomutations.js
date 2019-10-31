@@ -8,8 +8,8 @@ import { gql } from 'apollo-boost';
 
 
 export const LocationSearch = gql`
-    mutation Search {
-        search(term: "Matcha", location: "charlotte", limit: 10) {
+    mutation SearchForLocation($location: String!) {
+        search(term: "matcha", location: $location, limit: 10) {
             total
             business {
                 name

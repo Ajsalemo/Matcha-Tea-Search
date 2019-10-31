@@ -1,10 +1,11 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { InputAdornment, TextField } from '@material-ui/core';
+import { InputAdornment, TextField, Button } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
+import { Formik, Form } from 'formik';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -21,20 +22,44 @@ const SearchIcon = styled(Search)`
     }
 `;
 
+const StyledForm = styled(Form)`
+    display: flex;
+`;
+
 // ---------------------------------------------------------------------------------- //
 
 const SubmitForm = () => {
     return (
-        <TextfieldInput 
-            id="search-for-location"
-            label="Search for locations"
-            placeholder="Ex. Charlotte, NC"
-            margin="normal"
-            variant="filled"
-            InputProps={{
-                endAdornment: <InputAdornment position='end'><SearchIcon /></InputAdornment>
-            }}
-        />
+        <Formik
+                initialValues={{ search: '' }}
+                onSubmit={(values, { setSubmitting }) => {
+                    console.log(values.search);
+                    setSubmitting(false);
+                }}
+            >
+            {({ values, handleChange }) => (
+                <StyledForm>
+                    <TextfieldInput 
+                        name='search'
+                        id='search-for-location'
+                        label='Search for locations'
+                        placeholder='Ex. Charlotte, NC'
+                        margin='normal'
+                        variant='filled'
+                        value={values.search}
+                        onChange={handleChange}
+                        InputProps={{
+                            endAdornment: 
+                                <InputAdornment position='end'>
+                                    <Button type='submit'>
+                                        <SearchIcon/>
+                                    </Button>
+                                </InputAdornment>
+                        }}
+                    />
+                </StyledForm>
+            )}
+        </Formik>
     );
 }
 
