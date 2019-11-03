@@ -1,21 +1,26 @@
-// ----------------------------------- Imports -------------------------------------- //
+// ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { ApolloProvider } from '@apollo/react-hooks';
-import React from 'react';
-import { client } from './apolloclient';
+import gql from 'graphql-tag';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-export const ApolloHOC = props => {
-    const { children } = props;
-    return (
-        <ApolloProvider client={client}>
-            {children}
-        </ApolloProvider>
-    );
-}
+
+export const LOCATION_SEARCH = gql`
+    query LocationSearch($location: String!) {
+        search(term: "matcha", location: $location, limit: 5) {
+            total
+            business {
+                name
+                id
+                alias
+                rating
+                url
+            }
+        }
+    }
+`;
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //

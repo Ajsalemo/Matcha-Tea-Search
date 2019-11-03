@@ -6,6 +6,8 @@ import { Search } from '@material-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
+import { useApolloClient } from '@apollo/react-hooks';
+import { LOCATION_SEARCH } from '../apollo/apolloqueries';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -29,14 +31,23 @@ const StyledForm = styled(Form)`
 // ---------------------------------------------------------------------------------- //
 
 const SubmitForm = () => {
+    const client = useApolloClient();
     return (
         <Formik
-                initialValues={{ search: '' }}
-                onSubmit={(values, { setSubmitting }) => {
-                    console.log(values.search);
-                    setSubmitting(false);
-                }}
-            >
+            initialValues={{ search: '' }}
+            onSubmit={(values, { setSubmitting }) => {
+                console.log(values.search);
+                // Yelp's search endpoint is a GET request
+                // In turn the query method from the client was used instead of a mutation
+                client.query({
+                    query: LOCATION_SEARCH,
+                    variables: {
+                        location: values.search
+                    }
+                })
+                setSubmitting(false)
+            }}
+        >
             {({ values, handleChange }) => (
                 <StyledForm>
                     <TextfieldInput 
