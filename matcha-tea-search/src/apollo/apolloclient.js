@@ -2,7 +2,9 @@
 // ---------------------------------------------------------------------------------- //
 
 import ApolloClient from 'apollo-boost';
- 
+import fetch from 'isomorphic-fetch';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
@@ -13,7 +15,7 @@ export const client = new ApolloClient({
     operation.setContext(context => ({
       headers: {
         ...context.headers,
-        Authorization: process.env.YELP_API_KEY,
+        Authorization: `Bearer ${process.env.YELP_ALP_KEY}`,
         'Accept-Language': 'en_US'
       }
     }))

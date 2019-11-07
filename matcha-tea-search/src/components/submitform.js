@@ -1,7 +1,7 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { InputAdornment, TextField, Button } from '@material-ui/core';
+import { InputAdornment, TextField, Button, CircularProgress } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
@@ -35,11 +35,10 @@ const SubmitForm = () => {
     return (
         <Formik
             initialValues={{ search: '' }}
-            onSubmit={(values, { setSubmitting }) => {
-                console.log(values.search);
+            onSubmit={async (values, { setSubmitting }) => {
                 // Yelp's search endpoint is a GET request
                 // In turn the query method from the client was used instead of a mutation
-                client.query({
+                await client.query({
                     query: LOCATION_SEARCH,
                     variables: {
                         location: values.search
@@ -48,7 +47,7 @@ const SubmitForm = () => {
                 setSubmitting(false)
             }}
         >
-            {({ values, handleChange }) => (
+            {({ values, handleChange, isSubmitting }) => (
                 <StyledForm>
                     <TextfieldInput 
                         name='search'
@@ -61,6 +60,8 @@ const SubmitForm = () => {
                         onChange={handleChange}
                         InputProps={{
                             endAdornment: 
+                            isSubmitting ? <CircularProgress /> 
+                                :
                                 <InputAdornment position='end'>
                                     <Button type='submit'>
                                         <SearchIcon/>
