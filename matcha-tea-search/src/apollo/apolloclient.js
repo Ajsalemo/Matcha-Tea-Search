@@ -2,13 +2,32 @@
 // ---------------------------------------------------------------------------------- //
 
 import ApolloClient from 'apollo-boost';
-import fetch from 'isomorphic-fetch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { persistCache } from 'apollo-cache-persist';
+import fetch from 'isomorphic-fetch';
 
 // ---------------------------------------------------------------------------------- //
+// ---------------------------------------------------------------------------------- //
+
+const cache = new InMemoryCache();
+
+const persistData = () => {
+  persistCache({
+    cache,
+    storage: typeof window !== 'undefined' && window.localStorage,
+  });
+}
+
+try {
+  persistData()
+} catch(err) {
+  console.log(err)
+}
+
 // ---------------------------------------------------------------------------------- //
 
 export const client = new ApolloClient({
+  cache,
   uri: process.env.APOLLO_CLIENT_URI,
   fetch,
   request: operation => {
