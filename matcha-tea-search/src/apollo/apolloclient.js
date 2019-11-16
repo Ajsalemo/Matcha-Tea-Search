@@ -11,18 +11,17 @@ import fetch from 'isomorphic-fetch';
 
 const cache = new InMemoryCache();
 
-const persistData = () => {
-  persistCache({
+// ! - Since Window is not available in build time with Gatsby, this IIFE throws an error. 
+// ! - This promise still persists queries, but need to find a better possible solution to avoid any thrown errors.
+(async () => {
+  await persistCache({
     cache,
     storage: typeof window !== 'undefined' && window.localStorage,
+  }).catch(err => {
+    console.log('Window was not available at build time')
+    throw err;
   });
-}
-
-try {
-  persistData()
-} catch(err) {
-  console.log(err)
-}
+})().catch(err => console.log(err));
 
 // ---------------------------------------------------------------------------------- //
 
