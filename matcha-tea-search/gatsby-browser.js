@@ -2,13 +2,12 @@
 // ---------------------------------------------------------------------------------- //
 
 import React from 'react';
-import { ApolloProvider } from 'react-apollo';
-import { client } from './src/apollo/apolloclient';
+import { ApolloProviderHOC } from './src/apollo/apolloclient';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-export const wrapRootElement = ({ element }) => <ApolloProvider client={client}>{element}</ApolloProvider>;
+export const wrapRootElement = ({ element }) => <ApolloProviderHOC>{element}</ApolloProviderHOC>;
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //

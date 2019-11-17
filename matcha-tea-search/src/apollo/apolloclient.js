@@ -1,44 +1,61 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
+import React, { useState, useEffect } from 'react';
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { persistCache } from 'apollo-cache-persist';
 import fetch from 'isomorphic-fetch';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { CircularProgress } from '@material-ui/core';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const cache = new InMemoryCache();
-
-// ! - Since Window is not available in build time with Gatsby, this IIFE throws an error. 
-// ! - This promise still persists queries, but need to find a better possible solution to avoid any thrown errors.
-(async () => {
-  await persistCache({
-    cache,
-    storage: typeof window !== 'undefined' && window.localStorage,
-  }).catch(err => {
-    console.log('Window was not available at build time')
-    throw err;
-  });
-})().catch(err => console.log(err));
-
-// ---------------------------------------------------------------------------------- //
-
-export const client = new ApolloClient({
-  cache,
-  uri: process.env.APOLLO_CLIENT_URI,
-  fetch,
-  request: operation => {
-    operation.setContext(context => ({
-      headers: {
-        ...context.headers,
-        Authorization: `Bearer ${process.env.YELP_ALP_KEY}`,
-        'Accept-Language': 'en_US'
+// Higher Order Function which accepts children - in this case this would be the 'rootElement' in gatsby-browser.js
+// This function lets persistCache run in the window, by letting window load before persistCache starts to run
+export const ApolloProviderHOC = props => {
+  const { children } = props;
+  // Set state
+  const [client, setClient] = useState(undefined);
+  useEffect(() => {
+    // Set a new instance of the cache
+    const cache = new InMemoryCache();
+    // Instantiate the client
+    const client = new ApolloClient({
+      cache,
+      uri: process.env.APOLLO_CLIENT_URI,
+      fetch,
+      request: operation => {
+        operation.setContext(context => ({
+          headers: {
+            ...context.headers,
+            Authorization: `Bearer ${process.env.YELP_ALP_KEY}`,
+            'Accept-Language': 'en_US'
+          }
+        }))
       }
-    }))
-  }
-});
+    });
+    // Persist cache - between loads or hard refreshes, this prevents query or mutation data from disappearing the cache
+    persistCache({ 
+      cache,
+      // Local storage is used as the storage provider
+      storage: window.localStorage
+    }).then(() => {
+      // Hook that accepts the client as state
+      setClient(client);
+    })
+    return () => {};
+  }, []);
+
+  // If the client hasn't loaded yet then display the loading indicator
+  if (client === undefined) return <div><CircularProgress /></div>;
+  return (
+    <ApolloProvider client={client}>
+      {children}
+    </ApolloProvider>
+  )
+}
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
