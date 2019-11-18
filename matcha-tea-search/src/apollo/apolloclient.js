@@ -1,13 +1,13 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import React, { useState, useEffect } from 'react';
+import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { persistCache } from 'apollo-cache-persist';
 import fetch from 'isomorphic-fetch';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { CircularProgress } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import Loading from '../components/loading';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -49,7 +49,7 @@ export const ApolloProviderHOC = props => {
   }, []);
 
   // If the client hasn't loaded yet then display the loading indicator
-  if (client === undefined) return <div><CircularProgress /></div>;
+  if (client === undefined) return <Loading />;
   return (
     <ApolloProvider client={client}>
       {children}
