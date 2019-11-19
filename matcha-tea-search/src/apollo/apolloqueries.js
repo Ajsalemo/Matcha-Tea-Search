@@ -8,8 +8,8 @@ import gql from 'graphql-tag';
 
 
 export const LOCATION_SEARCH = gql`
-    query LocationSearch($location: String!) {
-        search(term: "matcha", location: $location, limit: 5) {
+    query LocationSearch($location: String!, $radius: Float!) {
+        search(term: "matcha", location: $location, limit: 5, radius: $radius) {
             total
             business {
                 name

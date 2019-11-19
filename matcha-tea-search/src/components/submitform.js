@@ -1,20 +1,21 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { InputAdornment, TextField, Button, CircularProgress } from '@material-ui/core';
+import { useApolloClient } from '@apollo/react-hooks';
+import { Button, CircularProgress, InputAdornment, TextField } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
+import { Form, Formik } from 'formik';
 import React from 'react';
 import styled from 'styled-components';
-import { Formik, Form } from 'formik';
-import { useApolloClient } from '@apollo/react-hooks';
 import { LOCATION_SEARCH } from '../apollo/apolloqueries';
+import RadiusSelect from './radiusselect';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
 const TextfieldInput = styled(TextField)`
-    width: 70%;
-    margin: 7em auto 0em auto;
+    width: 90%;
+    margin-top: 7em;
     background-color: #fff;
 `;
 
@@ -26,6 +27,12 @@ const SearchIcon = styled(Search)`
 
 const StyledForm = styled(Form)`
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
+
+const SubmitButton = styled(Button)`
+    min-width: 0em;
 `;
 
 // ---------------------------------------------------------------------------------- //
@@ -34,14 +41,15 @@ const SubmitForm = () => {
     const client = useApolloClient();
     return (
         <Formik
-            initialValues={{ search: '' }}
+            initialValues={{ search: '', radius: 40000 }}
             onSubmit={async (values, { setSubmitting }) => {
                 // Yelp's search endpoint is a GET request
                 // In turn the query method from the client was used instead of a mutation
                 await client.query({
                     query: LOCATION_SEARCH,
                     variables: {
-                        location: values.search
+                        location: values.search,
+                        radius: values.radius
                     }
                 })
                 setSubmitting(false)
@@ -60,13 +68,18 @@ const SubmitForm = () => {
                         onChange={handleChange}
                         InputProps={{
                             endAdornment: 
-                            isSubmitting ? <CircularProgress /> 
-                                :
-                                <InputAdornment position='end'>
-                                    <Button type='submit'>
-                                        <SearchIcon/>
-                                    </Button>
-                                </InputAdornment>
+                            <InputAdornment position='end'>
+                                {isSubmitting ? <CircularProgress /> 
+                                    :                    
+                                <SubmitButton type='submit' disabled={isSubmitting}>
+                                    <SearchIcon/>
+                                </SubmitButton>}
+                                <RadiusSelect 
+                                    // * Yelp's API defines their radius in meters 
+                                    radius={values.radius}
+                                    handleChange={handleChange}
+                                />      
+                            </InputAdornment>
                         }}
                     />
                 </StyledForm>
