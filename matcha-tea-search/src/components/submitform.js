@@ -9,6 +9,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { LOCATION_SEARCH } from '../apollo/apolloqueries';
 import RadiusSelect from './radiusselect';
+import LimitSelect from './limitselect';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -41,7 +42,7 @@ const SubmitForm = () => {
     const client = useApolloClient();
     return (
         <Formik
-            initialValues={{ search: '', radius: 40000 }}
+            initialValues={{ search: '', radius: 40000, results: 5 }}
             onSubmit={async (values, { setSubmitting }) => {
                 // Yelp's search endpoint is a GET request
                 // In turn the query method from the client was used instead of a mutation
@@ -49,7 +50,8 @@ const SubmitForm = () => {
                     query: LOCATION_SEARCH,
                     variables: {
                         location: values.search,
-                        radius: values.radius
+                        radius: values.radius,
+                        limit: values.results
                     }
                 })
                 setSubmitting(false)
@@ -69,16 +71,20 @@ const SubmitForm = () => {
                         InputProps={{
                             endAdornment: 
                             <InputAdornment position='end'>
-                                {isSubmitting ? <CircularProgress /> 
-                                    :                    
-                                <SubmitButton type='submit' disabled={isSubmitting}>
-                                    <SearchIcon/>
-                                </SubmitButton>}
+                                <LimitSelect 
+                                    results={values.results}
+                                    handleChange={handleChange}
+                                />
                                 <RadiusSelect 
                                     // * Yelp's API defines their radius in meters 
                                     radius={values.radius}
                                     handleChange={handleChange}
                                 />      
+                                {isSubmitting ? <CircularProgress /> 
+                                    :                    
+                                <SubmitButton type='submit' disabled={isSubmitting}>
+                                    <SearchIcon/>
+                                </SubmitButton>}
                             </InputAdornment>
                         }}
                     />

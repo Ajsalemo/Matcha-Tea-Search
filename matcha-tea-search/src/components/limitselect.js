@@ -1,55 +1,55 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { InputLabel, MenuItem, Select, Grid } from '@material-ui/core';
+import { Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const StypedInputLabel = styled(InputLabel)`
+const StyledLimitSelect = styled(InputLabel)`
     font-size: 0.7em;
 `;
 
-const ParentRadiusGrid = styled(Grid)`
-    border-right: 1px solid #000;
+const ParentSelectGrid = styled(Grid)`
     border-left: 1px solid #000;
     padding: 0em 0.3em;
 `;
 
 // ---------------------------------------------------------------------------------- //
 
-const RadiusSelect = props => {
-    const { radius, handleChange } = props;
+// This function loops values between 5 and 50 in increments of 5, the value is then assigned in value, key and description to the component
+// During the loop, the components are pushed to an array that starts out as empty - this array is then returned by the function complete with the values
+const LimitSelect = props => {
+    const { results, handleChange } = props;
+    let menuComponent = [];
+
+    for(let i = 5; i > 0 && i <= 50; i+=5) {
+        menuComponent.push(i);
+    }
+
     return (
-        <ParentRadiusGrid>
-            <StypedInputLabel id='radius-select'>Radius(Mi.)</StypedInputLabel>
+        <ParentSelectGrid>
+            <StyledLimitSelect id='results-select'>Results</StyledLimitSelect>
             <Select
-                id='radius-select-value'
-                name='radius'
-                value={radius}
+                id='results-select-value'
+                name='results'
+                value={results}
                 onChange={handleChange}
             >
-                {/* 
-                    // * Yelp's API defines their radius in meters 
-                    // * These values have been converted from Miles to Meters
-                */}
-                <MenuItem value={1610}>1</MenuItem>
-                <MenuItem value={8047}>5</MenuItem>
-                <MenuItem value={16094}>10</MenuItem>
-                <MenuItem value={24141}>15</MenuItem>
-                <MenuItem value={32187}>20</MenuItem>
-                <MenuItem value={40000}>25</MenuItem>
+                {menuComponent.map((val, j) => (
+                    <MenuItem value={val} key={j}>{val}</MenuItem>
+                ))}
             </Select>
-        </ParentRadiusGrid>
+        </ParentSelectGrid>
     );
 }
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-export default RadiusSelect;
+export default LimitSelect;
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
