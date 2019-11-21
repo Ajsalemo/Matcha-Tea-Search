@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { LOCATION_SEARCH } from '../apollo/apolloqueries';
 import RadiusSelect from './radiusselect';
 import LimitSelect from './limitselect';
+import * as Yup from 'yup';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -38,11 +39,21 @@ const SubmitButton = styled(Button)`
 
 // ---------------------------------------------------------------------------------- //
 
+const SubmitFormValidationSchema = Yup.object().shape({
+    search: Yup.string()
+        .min(2, 'The value you have entered is too short')
+        .max(65, 'The value you have entered is too long')
+        .required('Required')
+});
+
+// ---------------------------------------------------------------------------------- //
+
 const SubmitForm = () => {
     const client = useApolloClient();
     return (
         <Formik
             initialValues={{ search: '', radius: 40000, results: 5 }}
+            validationSchema={SubmitFormValidationSchema}
             onSubmit={async (values, { setSubmitting }) => {
                 // Yelp's search endpoint is a GET request
                 // In turn the query method from the client was used instead of a mutation
