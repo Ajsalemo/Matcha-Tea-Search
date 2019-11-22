@@ -4,7 +4,7 @@
 import { useApolloClient } from '@apollo/react-hooks';
 import { Button, CircularProgress, InputAdornment, TextField } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
-import { Form, Formik } from 'formik';
+import { Form, Formik, ErrorMessage } from 'formik';
 import React from 'react';
 import styled from 'styled-components';
 import { LOCATION_SEARCH } from '../apollo/apolloqueries';
@@ -17,7 +17,7 @@ import * as Yup from 'yup';
 
 const TextfieldInput = styled(TextField)`
     width: 90%;
-    margin-top: 7em;
+    margin: 7em 0em 0em 0em;
     background-color: #fff;
 `;
 
@@ -29,12 +29,20 @@ const SearchIcon = styled(Search)`
 
 const StyledForm = styled(Form)`
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const SubmitButton = styled(Button)`
     min-width: 0em;
+`;
+
+const ErrorDiv = styled.div`
+    background-color: #fff;
+    padding: 0em 1.5em;
+    font-weight: bold;
+    color: red;
+    border: 1px solid red;
 `;
 
 // ---------------------------------------------------------------------------------- //
@@ -68,7 +76,7 @@ const SubmitForm = () => {
                 setSubmitting(false)
             }}
         >
-            {({ values, handleChange, isSubmitting }) => (
+            {({ values, handleChange, isSubmitting, errors }) => (
                 <StyledForm>
                     <TextfieldInput 
                         name='search'
@@ -99,6 +107,7 @@ const SubmitForm = () => {
                             </InputAdornment>
                         }}
                     />
+                    <ErrorMessage name='search'>{msg => <ErrorDiv>{msg}</ErrorDiv>}</ErrorMessage>
                 </StyledForm>
             )}
         </Formik>
