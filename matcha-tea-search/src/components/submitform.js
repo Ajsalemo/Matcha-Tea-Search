@@ -4,13 +4,13 @@
 import { useApolloClient } from '@apollo/react-hooks';
 import { Button, CircularProgress, InputAdornment, TextField } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
-import { Form, Formik, ErrorMessage } from 'formik';
+import { ErrorMessage, Form, Formik } from 'formik';
 import React from 'react';
 import styled from 'styled-components';
-import { LOCATION_SEARCH } from '../apollo/apolloqueries';
-import RadiusSelect from './radiusselect';
-import LimitSelect from './limitselect';
 import * as Yup from 'yup';
+import { LOCATION_SEARCH } from '../apollo/apolloqueries';
+import LimitSelect from './limitselect';
+import RadiusSelect from './radiusselect';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -62,7 +62,7 @@ const SubmitForm = () => {
         <Formik
             initialValues={{ search: '', radius: 40000, results: 5 }}
             validationSchema={SubmitFormValidationSchema}
-            onSubmit={async (values, { setSubmitting }) => {
+            onSubmit={async (values, { setSubmitting, setErrors }) => {
                 // Yelp's search endpoint is a GET request
                 // In turn the query method from the client was used instead of a mutation
                 await client.query({
@@ -72,11 +72,14 @@ const SubmitForm = () => {
                         radius: values.radius,
                         limit: values.results
                     }
+                }).catch(err => {
+                    // * Sets the returned error to the 'search' field
+                    setErrors({ search: err.message })
                 })
                 setSubmitting(false)
             }}
         >
-            {({ values, handleChange, isSubmitting, errors }) => (
+            {({ values, handleChange, isSubmitting }) => (
                 <StyledForm>
                     <TextfieldInput 
                         name='search'
@@ -107,7 +110,8 @@ const SubmitForm = () => {
                             </InputAdornment>
                         }}
                     />
-                    <ErrorMessage name='search'>{msg => <ErrorDiv>{msg}</ErrorDiv>}</ErrorMessage>
+                    {/* // * Formik's error state can be accessed through the callback in this component */}
+                    <ErrorMessage name='search'>{err => <ErrorDiv>{err}</ErrorDiv>}</ErrorMessage>
                 </StyledForm>
             )}
         </Formik>
