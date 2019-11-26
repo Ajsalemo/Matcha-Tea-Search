@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import { LOCATION_SEARCH } from '../apollo/apolloqueries';
 import LimitSelect from './limitselect';
 import RadiusSelect from './radiusselect';
+import { navigate } from 'gatsby';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -72,6 +73,13 @@ const SubmitForm = () => {
                         radius: values.radius,
                         limit: values.results
                     }
+                }).then(data => {
+                    navigate(
+                        '/search-results',
+                        {
+                            state: { data }
+                        }
+                    )
                 }).catch(err => {
                     // * Sets the returned error to the 'search' field
                     setErrors({ search: err.message })
