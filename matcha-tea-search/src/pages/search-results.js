@@ -3,8 +3,18 @@
 
 import React from 'react';
 import { navigate } from 'gatsby';
+import styled from 'styled-components';
+import { Grid } from '@material-ui/core';
+import SubmitForm from '../components/submitform';
 
 // ---------------------------------------------------------------------------------- //
+// ---------------------------------------------------------------------------------- //
+
+const SearchReultsPage = styled(Grid)`
+    background-color: #000000de;
+    height: 100vh;
+`;
+
 // ---------------------------------------------------------------------------------- //
 
 const SearchResults = props => {
@@ -14,7 +24,19 @@ const SearchResults = props => {
         navigate('/')
         return null;
     } 
-    return <div>{props.location.state.data.data.search.business[0].name}</div>;
+    return (
+        <SearchReultsPage item>
+            <SubmitForm />
+            <Grid container>
+                <Grid item lg={6} md={6} sm={6} xs={12}>
+                    DIV
+                </Grid>
+                <Grid item lg={6} md={6} sm={6} xs={12}>
+                    DIV
+                </Grid>
+            </Grid>
+        </SearchReultsPage>
+    );
 }
 
 // ---------------------------------------------------------------------------------- //

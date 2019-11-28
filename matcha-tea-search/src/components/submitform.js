@@ -18,7 +18,6 @@ import { navigate } from 'gatsby';
 
 const TextfieldInput = styled(TextField)`
     width: 90%;
-    margin: 7em 0em 0em 0em;
     background-color: #fff;
 `;
 
@@ -32,6 +31,8 @@ const StyledForm = styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    height: fit-content;
 `;
 
 const SubmitButton = styled(Button)`
@@ -74,6 +75,8 @@ const SubmitForm = () => {
                         limit: values.results
                     }
                 }).then(data => {
+                    // * After form submission, programmatically navigate to the results page
+                    // * Data is passed along the route to be pulled from props inside that page
                     navigate(
                         '/search-results',
                         {
