@@ -1,18 +1,24 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import React from 'react';
-import { navigate } from 'gatsby';
-import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
+import { navigate } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
 import SubmitForm from '../components/submitform';
+import BusinessDisplay from '../components/businessdisplay';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const SearchReultsPage = styled(Grid)`
+const SearchResultsPage = styled(Grid)`
     background-color: #000000de;
     height: 100vh;
+`;
+
+const SearchResultsGrid = styled(Grid)`
+    display: flex;
+    justify-content: center;
 `;
 
 // ---------------------------------------------------------------------------------- //
@@ -24,18 +30,19 @@ const SearchResults = props => {
         navigate('/')
         return null;
     } 
+    const data = props.location.state.data.data.search.business;
     return (
-        <SearchReultsPage item>
+        <SearchResultsPage item>
             <SubmitForm />
             <Grid container>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
-                    DIV
-                </Grid>
+                <SearchResultsGrid item lg={6} md={6} sm={6} xs={12}>
+                    <BusinessDisplay data={data} />
+                </SearchResultsGrid>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
                     DIV
                 </Grid>
             </Grid>
-        </SearchReultsPage>
+        </SearchResultsPage>
     );
 }
 
