@@ -13,12 +13,13 @@ import BusinessDisplay from '../components/businessdisplay';
 
 const SearchResultsPage = styled(Grid)`
     background-color: #000000de;
-    height: 100vh;
 `;
 
 const SearchResultsGrid = styled(Grid)`
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 `;
 
 // ---------------------------------------------------------------------------------- //

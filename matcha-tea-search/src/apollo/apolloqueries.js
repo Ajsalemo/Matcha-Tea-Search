@@ -16,6 +16,7 @@ export const LOCATION_SEARCH = gql`
                 id
                 alias
                 rating
+                price
                 url
                 display_phone
                 location {
@@ -39,6 +40,15 @@ export const LOCATION_SEARCH = gql`
                         end
                     }
                     is_open_now
+                }
+                attributes {
+                    wheelchair_accessible {
+                        name_code
+                        value_code
+                    }
+                }
+                reviews {
+                    text
                 }
             }
         }
