@@ -3,9 +3,9 @@
 
 import { Grid, Typography } from '@material-ui/core';
 import { Accessible } from '@material-ui/icons';
+import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -60,6 +60,7 @@ const AttributesDiv = styled(Grid)`
 // ---------------------------------------------------------------------------------- //
 
 const BusinessDisplay = props => {
+    
     const { data } = props;
     return data.map(business => {
         // ? Test the object for nested arrays before defining

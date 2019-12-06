@@ -5,13 +5,13 @@ import { useApolloClient } from '@apollo/react-hooks';
 import { Button, CircularProgress, InputAdornment, TextField } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import { ErrorMessage, Form, Formik } from 'formik';
+import { navigate } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { LOCATION_SEARCH } from '../apollo/apolloqueries';
 import LimitSelect from './limitselect';
 import RadiusSelect from './radiusselect';
-import { navigate } from 'gatsby';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //

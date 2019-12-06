@@ -23,7 +23,16 @@ module.exports = {
         ]
       }
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images/`
+      }
+    },
     `gatsby-plugin-styled-components`,
-    `gatsby-theme-material-ui`
+    `gatsby-theme-material-ui`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`
   ]
 }
