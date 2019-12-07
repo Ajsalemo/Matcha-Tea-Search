@@ -6,6 +6,7 @@ import { Accessible } from '@material-ui/icons';
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
+import { todaysBusinessHours } from '../helpers/helpers';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -57,16 +58,23 @@ const AttributesDiv = styled(Grid)`
     color: ${props => props.handicapaccessible ? '#92a3ff' : 'red'};
 `;
 
+const DailyBusinessHours = styled(Typography)`
+    color: #fff;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+`;
+
 // ---------------------------------------------------------------------------------- //
 
 const BusinessDisplay = ({ data }) => {
     return data.map(business => {
         // ? Test the object for nested arrays before defining
         const isBusinessOpen = business.hours[0] ? business.hours[0].is_open_now : null;
-        const reviewExcerpt = business.reviews ? business.reviews[0].text : null;
+        const currentBusinessHours = business.hours[0] ? business.hours[0].open : null;
+        const reviewExcerpt = business.reviews.length ? business.reviews[0].text : null;
         // ? Test both nested objects for a value before defining it
         const handicapAccessible = business.attributes && business.attributes.wheelchair_accessible ? business.attributes.wheelchair_accessible.value_code : null;
-
         return (
             <BusinessGrid item lg={10} key={business.id}>
                 <BusinessImage src={business.photos[0]} alt={business.name} />
@@ -75,6 +83,8 @@ const BusinessDisplay = ({ data }) => {
                     {/* // ? If the business is currently open(Open during business hours) then display either an open or closed message that's color coordinated */}
                     {/* // ? If the 'hours' array is empty, then display nothing */}
                     {isBusinessOpen ? <Typography style={{ color: '#92a3ff' }}>Currently Open</Typography> : isBusinessOpen !== null && !isBusinessOpen ? <Typography color='secondary'>Currently Closed</Typography> : null}
+                    {/* // ? This component displays the business hours for the week */}
+                    <DailyBusinessHours gutterBottom key={business.alias}>{todaysBusinessHours(currentBusinessHours)}</DailyBusinessHours>
                     <Typography style={{ color: '#fff' }}>{business.price}</Typography>
                     {/* // ? Let the user know whether or not this place of business is wheelchair accessible */}
                     {/* // ? If the 'attributes' array is empty, then display nothing - Yelp's API response returns 'true/false' as a string */}

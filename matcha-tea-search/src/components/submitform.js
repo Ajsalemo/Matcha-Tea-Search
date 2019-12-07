@@ -69,6 +69,7 @@ const SubmitForm = () => {
                 // In turn the query method from the client was used instead of a mutation
                 await client.query({
                     query: LOCATION_SEARCH,
+                    fetchPolicy: 'network-only',
                     variables: {
                         location: values.search,
                         radius: values.radius,

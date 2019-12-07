@@ -2,11 +2,10 @@
 // ---------------------------------------------------------------------------------- //
 
 import { Grid } from '@material-ui/core';
-import { StaticQuery } from 'gatsby';
+import { StaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import React from 'react';
 import styled from 'styled-components';
-import { headerImageQuery } from '../apollo/apolloqueries';
 import Hero from '../components/hero';
 
 // ---------------------------------------------------------------------------------- //
@@ -50,6 +49,20 @@ const Landing = () => {
         </LandingGridContainer>
     );
 }
+
+// ---------------------------------------------------------------------------------- //
+// ? This query loads the background image on the landing page with 'gatsby-background-image'
+export const headerImageQuery = graphql`
+    query {
+        file(relativePath: { eq: "matcha-background-image.jpg" }) {
+            childImageSharp {
+                fluid(quality: 100) {
+                    ...GatsbyImageSharpFluid_withWebp
+                }
+            }
+        }
+    }
+`;
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
