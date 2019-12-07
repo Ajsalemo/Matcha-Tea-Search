@@ -59,9 +59,7 @@ const AttributesDiv = styled(Grid)`
 
 // ---------------------------------------------------------------------------------- //
 
-const BusinessDisplay = props => {
-    
-    const { data } = props;
+const BusinessDisplay = ({ data }) => {
     return data.map(business => {
         // ? Test the object for nested arrays before defining
         const isBusinessOpen = business.hours[0] ? business.hours[0].is_open_now : null;

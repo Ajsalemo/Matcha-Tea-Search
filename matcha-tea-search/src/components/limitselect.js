@@ -21,10 +21,8 @@ const ParentSelectGrid = styled(Grid)`
 
 // This function loops values between 5 and 50 in increments of 5, the value is then assigned in value, key and description to the component
 // During the loop, the components are pushed to an array that starts out as empty - this array is then returned by the function complete with the values
-const LimitSelect = props => {
-    const { results, handleChange } = props;
+const LimitSelect = ({ results, handleChange }) => {
     let menuComponent = [];
-
     for(let i = 5; i > 0 && i <= 50; i+=5) {
         menuComponent.push(i);
     }

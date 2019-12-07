@@ -20,8 +20,7 @@ const ParentRadiusGrid = styled(Grid)`
 
 // ---------------------------------------------------------------------------------- //
 
-const RadiusSelect = props => {
-    const { radius, handleChange } = props;
+const RadiusSelect = ({ radius, handleChange }) => {
     return (
         <ParentRadiusGrid>
             <StypedInputLabel id='radius-select'>Radius(Mi.)</StypedInputLabel>
