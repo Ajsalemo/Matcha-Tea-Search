@@ -25,13 +25,14 @@ const SearchResultsGrid = styled(Grid)`
 // ---------------------------------------------------------------------------------- //
 
 const SearchResults = props => {
-    const data = props.location.state.data.data.search.business;
     // * If someone tries to manually type this route without state or data
     // * Push them back to the homepage - return null since nothing will be rendered 
     if(!props.location.state) {
         navigate('/')
         return null;
     } 
+    const data = props.location.state.data.data.search.business;
+
     return (
         <SearchResultsPage item>
             <SubmitForm />
