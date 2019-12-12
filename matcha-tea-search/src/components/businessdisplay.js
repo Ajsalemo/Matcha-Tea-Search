@@ -7,6 +7,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import { todaysBusinessHours } from '../helpers/helpers';
+import BusinessImage from './businessimage';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -23,11 +24,6 @@ const BusinessGrid = styled(Grid)`
     border: 1px solid #fff;
     border-radius: 1em;
     padding: 0.7em;
-`;
-
-const BusinessImage = styled.img`
-    border-radius: 0.5em;
-    height: 20em;
 `;
 
 const BusinessContactInfo = styled(Typography)`

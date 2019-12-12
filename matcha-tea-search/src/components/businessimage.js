@@ -1,46 +1,36 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { CircularProgress, Grid, Typography } from '@material-ui/core';
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import styled from 'styled-components';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const LoadingGridContainer = styled(Grid)`
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.5;
-`;
-
-// ! - Need a way to get rid of these important flags
-const LoadingIndicator = styled(CircularProgress)`
-    color: #000 !important;
-    width: 60px !important;
-    height: 60px !important;
-`;
-
-// ! - Need a way to get rid of these important flags
-const LoadingText = styled(Typography)`
-    font-family: Josefin Sans, Arial, sans-serif !important;
-    padding-left: 0.5em;
+const StyledLazyLoadImage = styled(LazyLoadImage)`
+    border-radius; 0.5em;
+    height: 20em;
 `;
 
 // ---------------------------------------------------------------------------------- //
 
-const Loading = () => (
-    <LoadingGridContainer container>
-        <LoadingIndicator /> <LoadingText variant='h6'>Loading..</LoadingText>
-    </LoadingGridContainer>
+// ? - Implemented this package due to 'gatsby-image' not being able to parse absolute file paths
+// ? - Since the landing page background image utilizes gatsby image and gatsby background image, and consistency was needed with the blur-up effect
+// ? - This package will still be able to create a blur-up effect for each image on load, including lazy loading images on larger result sizes
+const BusinessImage = ({ src, alt }) => (
+    <StyledLazyLoadImage
+      alt={alt}
+      src={src} 
+      effect="blur"
+    />
 );
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-export default Loading;
+export default BusinessImage;
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //

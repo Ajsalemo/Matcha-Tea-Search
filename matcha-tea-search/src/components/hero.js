@@ -29,15 +29,13 @@ const HeroGrid = styled(Grid)`
 
 // ---------------------------------------------------------------------------------- //
 
-const Hero = () => {
-    return (
-        <HeroGrid item sm={12} md={10}>
-            <HeroTypography variant="h1">Matcha Finder</HeroTypography>
-            <HeroTypography variant="subtitle1">Search for local Matcha</HeroTypography>
-            <SubmitForm />
-        </HeroGrid>
-    );
-}
+const Hero = () => (
+    <HeroGrid item sm={12} md={10}>
+        <HeroTypography variant="h1">Matcha Finder</HeroTypography>
+        <HeroTypography variant="subtitle1">Search for local Matcha</HeroTypography>
+        <SubmitForm />
+    </HeroGrid>
+);
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
