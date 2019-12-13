@@ -72,8 +72,8 @@ const BusinessDisplay = ({ data }) => {
         // ? Test both nested objects for a value before defining it
         const handicapAccessible = business.attributes && business.attributes.wheelchair_accessible ? business.attributes.wheelchair_accessible.value_code : null;
         return (
-            <BusinessGrid item lg={10} key={business.id}>
-                <BusinessImage src={business.photos[0]} alt={business.name} />
+            <BusinessGrid item lg={10} key={business.alias}>
+                <BusinessImage src={business.photos[0]} alt={business.name} key={business.id} />
                 <NestedBusinessGrid item lg={8}>
                     <BusinessFont variant='h2'>{business.name}</BusinessFont>
                     {/* // ? If the business is currently open(Open during business hours) then display either an open or closed message that's color coordinated */}

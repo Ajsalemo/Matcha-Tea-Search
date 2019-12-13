@@ -16,7 +16,7 @@ export const todaysBusinessHours = hours => {
             const loopedBusinessHoursStart = moment(hours[i].start, 'HH:mm').format('h:mm a');
             const loopedBusinessHoursEnd = moment(hours[i].end, 'HH:mm').format('h:mm a');
             const loopedWeekdayArray = weekDayArray[i];
-            formattedWeekDayArray.push(<span>{loopedWeekdayArray}: {loopedBusinessHoursStart} - {loopedBusinessHoursEnd}</span>)
+            formattedWeekDayArray.push(<span key={i}>{loopedWeekdayArray}: {loopedBusinessHoursStart} - {loopedBusinessHoursEnd}</span>)
         }     
     }
     return formattedWeekDayArray;

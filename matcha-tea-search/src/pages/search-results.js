@@ -7,6 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SubmitForm from '../components/submitform';
 import BusinessDisplay from '../components/businessdisplay';
+import GoogleApiWrapper from '../components/googlemaps';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -41,7 +42,7 @@ const SearchResults = props => {
                     <BusinessDisplay data={data} />
                 </SearchResultsGrid>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
-                    DIV
+                    <GoogleApiWrapper />
                 </Grid>
             </Grid>
         </SearchResultsPage>
