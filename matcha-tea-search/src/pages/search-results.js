@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SubmitForm from '../components/submitform';
 import BusinessDisplay from '../components/businessdisplay';
-import GoogleApiWrapper from '../components/googlemaps';
+import GoogleMapContainer from '../components/googlemaps';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -33,7 +33,6 @@ const SearchResults = props => {
         return null;
     } 
     const data = props.location.state.data.data.search.business;
-
     return (
         <SearchResultsPage item>
             <SubmitForm />
@@ -42,7 +41,7 @@ const SearchResults = props => {
                     <BusinessDisplay data={data} />
                 </SearchResultsGrid>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
-                    <GoogleApiWrapper />
+                    <GoogleMapContainer data={data} />
                 </Grid>
             </Grid>
         </SearchResultsPage>
