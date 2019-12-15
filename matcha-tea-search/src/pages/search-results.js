@@ -16,6 +16,11 @@ const SearchResultsPage = styled(Grid)`
     background-color: #000000de;
 `;
 
+const SearchResultsContainer = styled(Grid)`
+    display: flex;
+    justify-content: center;
+`;
+
 const SearchResultsGrid = styled(Grid)`
     display: flex;
     justify-content: center;
@@ -36,14 +41,14 @@ const SearchResults = props => {
     return (
         <SearchResultsPage item>
             <SubmitForm />
-            <Grid container>
-                <SearchResultsGrid item lg={6} md={6} sm={6} xs={12}>
+            <SearchResultsContainer container>
+                <SearchResultsGrid item lg={6} md={11} sm={11} xs={11}>
                     <BusinessDisplay data={data} />
                 </SearchResultsGrid>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
+                <Grid item lg={6} md={11} sm={11} xs={11}>
                     <GoogleMapContainer data={data} />
                 </Grid>
-            </Grid>
+            </SearchResultsContainer>
         </SearchResultsPage>
     );
 }

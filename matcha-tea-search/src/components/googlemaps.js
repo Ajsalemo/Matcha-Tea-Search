@@ -13,7 +13,10 @@ import BlueMapMarker from '../images/map-pin.png';
 const GoogleMapComponent = styled(Grid)`
     height: 100vh;
     width: 100%;
-    padding-right: 1.5em;
+    padding: 1em;
+    @media (min-width: 1280px) {
+        padding: 0 1.5em 1.5em 1.5em;
+    }
 `;
 
 // ---------------------------------------------------------------------------------- //
@@ -76,13 +79,14 @@ const GoogleMapContainer = ({ data }) => {
         <GoogleMapComponent>
             <GoogleMapReact 
                 bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_API_KEY }} 
-                defaultZoom={1}
+                zoom={3}
                 yesIWantToUseGoogleMapApiInternals
                 center={coords}
+                defaultCenter={{ lat: 40.7128, lng: 74.0060 }}
                 onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps, bulkCoordinates)}
             >
-                {bulkCoordinates.map(loc => (
-                    <Marker lat={loc.latitude} lng={loc.longitude} />
+                {bulkCoordinates.map((loc, i) => (
+                    <Marker lat={loc.latitude} lng={loc.longitude} key={i} />
                 ))}
             </GoogleMapReact>
         </GoogleMapComponent>
