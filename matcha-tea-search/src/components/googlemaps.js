@@ -19,6 +19,14 @@ const GoogleMapComponent = styled(Grid)`
     }
 `;
 
+const MarkerComponent = styled.img`
+    transition: all .2s ease-in-out;
+    &:hover {
+        transition: all .2s ease-in-out;
+        transform: scale(1.2);
+    }
+`;
+
 // ---------------------------------------------------------------------------------- //
 
 // The three following functions were taken from the following example - https://github.com/google-map-react/google-map-react-examples/blob/master/src/examples/Main.js#L69
@@ -94,8 +102,8 @@ const GoogleMapContainer = ({ data }) => {
 };
 
 const Marker = ({ lat, lng }) => (
-    <img lat={lat} lng={lng} src={BlueMapMarker} alt='' />
-)
+    <MarkerComponent lat={lat} lng={lng} src={BlueMapMarker} alt='' />
+);
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
