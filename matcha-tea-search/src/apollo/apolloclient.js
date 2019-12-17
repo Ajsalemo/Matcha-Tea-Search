@@ -1,13 +1,13 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { persistCache } from 'apollo-cache-persist';
-import fetch from 'isomorphic-fetch';
-import React, { useEffect, useState } from 'react';
-import Loading from '../components/loading';
+import { ApolloProvider } from "@apollo/react-hooks"
+import ApolloClient from "apollo-boost"
+import { InMemoryCache } from "apollo-cache-inmemory"
+import { persistCache } from "apollo-cache-persist"
+import fetch from "isomorphic-fetch"
+import React, { useEffect, useState } from "react"
+import Loading from "../components/loading"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -15,12 +15,12 @@ import Loading from '../components/loading';
 // Higher Order Function which accepts children - in this case this would be the 'rootElement' in gatsby-browser.js
 // This function lets persistCache run in the window, by letting window load before persistCache starts to run
 export const ApolloProviderHOC = props => {
-  const { children } = props;
+  const { children } = props
   // Set state
-  const [client, setClient] = useState(undefined);
+  const [client, setClient] = useState(undefined)
   useEffect(() => {
     // Set a new instance of the cache
-    const cache = new InMemoryCache();
+    const cache = new InMemoryCache()
     // Instantiate the client
     const client = new ApolloClient({
       cache,
@@ -31,30 +31,26 @@ export const ApolloProviderHOC = props => {
           headers: {
             ...context.headers,
             Authorization: `Bearer ${process.env.YELP_ALP_KEY}`,
-            'Accept-Language': 'en_US'
-          }
+            "Accept-Language": "en_US",
+          },
         }))
-      }
-    });
+      },
+    })
     // Persist cache - between loads or hard refreshes, this prevents query or mutation data from disappearing the cache
-    persistCache({ 
+    persistCache({
       cache,
       // Local storage is used as the storage provider
-      storage: window.localStorage
+      storage: window.localStorage,
     }).then(() => {
       // Hook that accepts the client as state
-      setClient(client);
+      setClient(client)
     })
-    return () => {};
-  }, []);
+    return () => {}
+  }, [])
 
   // If the client hasn't loaded yet then display the loading indicator
-  if (client === undefined) return <Loading />;
-  return (
-    <ApolloProvider client={client}>
-      {children}
-    </ApolloProvider>
-  )
+  if (client === undefined) return <Loading />
+  return <ApolloProvider client={client}>{children}</ApolloProvider>
 }
 
 // ---------------------------------------------------------------------------------- //
