@@ -42,11 +42,11 @@ const MapToolTip = ({
   businessState,
   businessCountry,
 }) => (
-  <Grid item>
+  <Grid container>
     <Typography variant="subtitle2">
       {numberInList + 1}. {businessName}
     </Typography>
-    <ToolTipGrid item>
+    <ToolTipGrid container>
       <ImageToolTipGrid item>
         <LazyLoadImage
           src={businessPhoto}

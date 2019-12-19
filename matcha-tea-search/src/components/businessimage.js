@@ -12,6 +12,7 @@ import styled from "styled-components"
 const StyledLazyLoadImage = styled(LazyLoadImage)`
     border-radius; 0.5em;
     height: 20em;
+    width: 100%;
 `
 
 // ---------------------------------------------------------------------------------- //

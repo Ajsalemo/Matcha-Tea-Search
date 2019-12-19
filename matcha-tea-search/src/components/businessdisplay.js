@@ -26,6 +26,14 @@ const BusinessGrid = styled(Grid)`
   padding: 0.7em;
 `
 
+const ImageAndDescriptionsGrid = styled(Grid)`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+`
+
 const BusinessContactInfo = styled(Typography)`
   color: #92a3ff;
   font-size: 0.9em;
@@ -81,54 +89,60 @@ const BusinessDisplay = ({ data }) => {
         ? business.attributes.wheelchair_accessible.value_code
         : null
     return (
-      <BusinessGrid item lg={10} key={business.alias}>
-        <BusinessImage
-          src={business.photos[0]}
-          alt={business.name}
-          key={business.id}
-        />
-        <NestedBusinessGrid item lg={8}>
-          {/* // ? - 'i + 1' is used as a numbered list, started from 1 - these numbers are also displayed on Google Maps to associate the businesses with the displayed markers */}
-          <BusinessFont variant="h2">
-            {i + 1}. {business.name}
-          </BusinessFont>
-          {/* // ? If the business is currently open(Open during business hours) then display either an open or closed message that's color coordinated */}
-          {/* // ? If the 'hours' array is empty, then display nothing */}
-          {isBusinessOpen ? (
-            <Typography style={{ color: "#92a3ff" }}>Currently Open</Typography>
-          ) : isBusinessOpen !== null && !isBusinessOpen ? (
-            <Typography color="secondary">Currently Closed</Typography>
-          ) : null}
-          {/* // ? This component displays the business hours for the week */}
-          <DailyBusinessHours gutterBottom key={business.alias}>
-            {todaysBusinessHours(currentBusinessHours)}
-          </DailyBusinessHours>
-          <Typography style={{ color: "#fff" }}>{business.price}</Typography>
-          {/* // ? Let the user know whether or not this place of business is wheelchair accessible */}
-          {/* // ? If the 'attributes' array is empty, then display nothing - Yelp's API response returns 'true/false' as a string */}
-          {handicapAccessible === "true" ? (
-            <AttributesDiv handicapaccessible={handicapAccessible}>
-              <Accessible /> Accessible
-            </AttributesDiv>
-          ) : handicapAccessible === "false" ? (
-            <AttributesDiv>
-              <Accessible /> Not Accessible
-            </AttributesDiv>
-          ) : null}
-          <BusinessRating>
-            Rating:{" "}
-            {business.rating
-              ? business.rating
-              : "No one has rated this business yet"}
-          </BusinessRating>
-          <BusinessRating>
-            "{reviewExcerpt}"
-            <Link to="#" style={{ paddingLeft: "0.4em" }}>
-              more
-            </Link>
-          </BusinessRating>
-        </NestedBusinessGrid>
-        <BusinessAddressGrid item lg={4}>
+      <BusinessGrid item sm={12} md={12} lg={12} key={business.alias}>
+        <ImageAndDescriptionsGrid item xs={10} sm={12} lg={10}>
+          <Grid item xs={10} sm={10} lg={6}>
+            <BusinessImage
+              src={business.photos[0]}
+              alt={business.name}
+              key={business.id}
+            />
+          </Grid>
+          <NestedBusinessGrid item xs={12} sm={12} lg={6}>
+            {/* // ? - 'i + 1' is used as a numbered list, started from 1 - these numbers are also displayed on Google Maps to associate the businesses with the displayed markers */}
+            <BusinessFont variant="h2">
+              {i + 1}. {business.name}
+            </BusinessFont>
+            {/* // ? If the business is currently open(Open during business hours) then display either an open or closed message that's color coordinated */}
+            {/* // ? If the 'hours' array is empty, then display nothing */}
+            {isBusinessOpen ? (
+              <Typography style={{ color: "#92a3ff" }}>
+                Currently Open
+              </Typography>
+            ) : isBusinessOpen !== null && !isBusinessOpen ? (
+              <Typography color="secondary">Currently Closed</Typography>
+            ) : null}
+            {/* // ? This component displays the business hours for the week */}
+            <DailyBusinessHours gutterBottom key={business.alias}>
+              {todaysBusinessHours(currentBusinessHours)}
+            </DailyBusinessHours>
+            <Typography style={{ color: "#fff" }}>{business.price}</Typography>
+            {/* // ? Let the user know whether or not this place of business is wheelchair accessible */}
+            {/* // ? If the 'attributes' array is empty, then display nothing - Yelp's API response returns 'true/false' as a string */}
+            {handicapAccessible === "true" ? (
+              <AttributesDiv handicapaccessible={handicapAccessible}>
+                <Accessible /> Accessible
+              </AttributesDiv>
+            ) : handicapAccessible === "false" ? (
+              <AttributesDiv>
+                <Accessible /> Not Accessible
+              </AttributesDiv>
+            ) : null}
+            <BusinessRating>
+              Rating:{" "}
+              {business.rating
+                ? business.rating
+                : "No one has rated this business yet"}
+            </BusinessRating>
+            <BusinessRating>
+              "{reviewExcerpt}"
+              <Link to="#" style={{ paddingLeft: "0.4em" }}>
+                more
+              </Link>
+            </BusinessRating>
+          </NestedBusinessGrid>
+        </ImageAndDescriptionsGrid>
+        <BusinessAddressGrid item xs={4} sm={2} lg={4}>
           <BusinessContactInfo variant="subtitle1">
             {business.display_phone}
           </BusinessContactInfo>

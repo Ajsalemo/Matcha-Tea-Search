@@ -26,6 +26,9 @@ const SearchResultsGrid = styled(Grid)`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  @media (min-width: 1260px) {
+    padding-left: 1em;
+  }
 `
 
 // ---------------------------------------------------------------------------------- //
