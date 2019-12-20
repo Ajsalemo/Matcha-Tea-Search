@@ -96,6 +96,7 @@ const BusinessDisplay = ({ data }) => {
               src={business.photos[0]}
               alt={business.name}
               key={business.id}
+              height={320}
             />
           </Grid>
           <NestedBusinessGrid item xs={12} sm={12} lg={6}>

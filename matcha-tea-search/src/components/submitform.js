@@ -4,12 +4,15 @@
 import { useApolloClient } from "@apollo/react-hooks"
 import { Button, CircularProgress, InputAdornment, TextField } from "@material-ui/core"
 import { Search } from "@material-ui/icons"
+import { Location } from "@reach/router"
 import { ErrorMessage, Form, Formik } from "formik"
-import { navigate } from "gatsby"
+import { Link, navigate } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import * as Yup from "yup"
 import { LOCATION_SEARCH } from "../apollo/apolloqueries"
+import MatchaIcon from "../images/matcha_icon.png"
+import BusinessImage from "./businessimage"
 import LimitSelect from "./limitselect"
 import RadiusSelect from "./radiusselect"
 
@@ -29,7 +32,8 @@ const SearchIcon = styled(Search)`
 
 const StyledForm = styled(Form)`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
   height: fit-content;
@@ -45,6 +49,16 @@ const ErrorDiv = styled.div`
   font-weight: bold;
   color: red;
   border: 1px solid red;
+`
+
+const HomeLinkLargeScreen = styled(Link)`
+  display: none;
+  @media (min-width: 1280px) {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 // ---------------------------------------------------------------------------------- //
@@ -93,6 +107,18 @@ const SubmitForm = () => {
     >
       {({ values, handleChange, isSubmitting }) => (
         <StyledForm>
+          {/* // * This 'Location' component is specifically from Gatsby itself. It gives the current pathname, amongst other location(url, path) details */}
+          {/* // * If the current path is '/search-results', then render the home icon link. If the path is '/', which is the landing/home page. Do not render the icon */}
+          <Location>
+            {({ location }) =>
+              location.pathname === "/search-results" ? (
+                <HomeLinkLargeScreen to="/">
+                  <BusinessImage src={MatchaIcon} alt="" />
+                  Home
+                </HomeLinkLargeScreen>
+              ) : null
+            }
+          </Location>
           <TextfieldInput
             name="search"
             id="search-for-location"
