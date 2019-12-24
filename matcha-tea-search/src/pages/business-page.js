@@ -12,7 +12,12 @@ import BusinessTitle from "../components/businesstitle"
 import IsBusinessOpen from "../components/isbusinessopen"
 import SubmitForm from "../components/submitform"
 import { todaysBusinessHours } from "../helpers/helpers"
-import { FlexCenterBaseGrid, PageBackground, WeekdayHoursFormat } from "../helpers/resusable-styles"
+import {
+  FlexCenterBaseGrid,
+  PageBackground,
+  WeekdayHoursFormat,
+  BusinessRatingFormat,
+} from "../helpers/resusable-styles"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -56,6 +61,12 @@ const BusinessPage = props => {
           </WeekdayHoursFormat>
           <Typography style={{ color: "#fff" }}>{data.price}</Typography>
           <AccessibleIcon handicapAccessible={handicapAccessibleBP} />
+          <BusinessRatingFormat>
+            Rating:{" "}
+            {data.rating
+              ? data.rating
+              : "No one has rated this business yet"}
+          </BusinessRatingFormat>
         </SingularBusinessPageGrid>
         <Grid item lg={2}>
           <BusinessAddress

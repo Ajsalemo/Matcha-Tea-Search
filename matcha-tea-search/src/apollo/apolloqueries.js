@@ -52,6 +52,13 @@ export const LOCATION_SEARCH = gql`
         }
         reviews {
           text
+          rating
+          time_created
+          id
+          user {
+            name
+            image_url
+          }
         }
       }
     }

@@ -18,6 +18,12 @@ export const WeekdayHoursFormat = styled(Typography)`
   flex-direction: column;
 `
 
+export const BusinessRatingFormat = styled(Typography)`
+  color: #fff;
+  padding-top: 2em;
+  font-size: 0.9em;
+`
+
 export const FlexCenterBaseGrid = styled(Grid)`
   display: flex;
   justify-content: center;

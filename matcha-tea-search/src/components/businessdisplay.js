@@ -7,7 +7,7 @@ import React from "react"
 import styled from "styled-components"
 import BusinessAddress from "../components/businessaddress"
 import { todaysBusinessHours } from "../helpers/helpers"
-import { FlexDisplayColumn, WeekdayHoursFormat } from "../helpers/resusable-styles"
+import { FlexDisplayColumn, WeekdayHoursFormat, BusinessRatingFormat } from "../helpers/resusable-styles"
 import AccessibleIcon from "./accessibleicon"
 import BusinessImage from "./businessimage"
 import BusinessTitle from "./businesstitle"
@@ -28,12 +28,6 @@ const ImageAndDescriptionsGrid = styled(FlexDisplayColumn)`
   @media (min-width: 600px) {
     flex-direction: row;
   }
-`
-
-const BusinessRating = styled(Typography)`
-  color: #fff;
-  padding-top: 2em;
-  font-size: 0.9em;
 `
 
 const NestedBusinessGrid = styled(Grid)`
@@ -84,13 +78,13 @@ const BusinessDisplay = ({ data }) => {
             </WeekdayHoursFormat>
             <Typography style={{ color: "#fff" }}>{business.price}</Typography>
             <AccessibleIcon handicapAccessible={handicapAccessible} />
-            <BusinessRating>
+            <BusinessRatingFormat>
               Rating:{" "}
               {business.rating
                 ? business.rating
                 : "No one has rated this business yet"}
-            </BusinessRating>
-            <BusinessRating>
+            </BusinessRatingFormat>
+            <BusinessRatingFormat>
               "{reviewExcerpt}"
               <Link
                 to="/business-page/"
@@ -99,7 +93,7 @@ const BusinessDisplay = ({ data }) => {
               >
                 more
               </Link>
-            </BusinessRating>
+            </BusinessRatingFormat>
           </NestedBusinessGrid>
         </ImageAndDescriptionsGrid>
         <BusinessAddress
