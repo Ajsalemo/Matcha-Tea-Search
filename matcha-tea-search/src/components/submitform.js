@@ -111,7 +111,7 @@ const SubmitForm = () => {
           {/* // * If the current path is '/search-results', then render the home icon link. If the path is '/', which is the landing/home page. Do not render the icon */}
           <Location>
             {({ location }) =>
-              location.pathname === "/search-results" ? (
+              location.pathname !== "/" ? (
                 <HomeLinkLargeScreen to="/">
                   <BusinessImage src={MatchaIcon} alt="" />
                   Home

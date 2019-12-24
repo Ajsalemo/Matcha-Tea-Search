@@ -1,27 +1,23 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { Grid } from "@material-ui/core"
 import { graphql, StaticQuery } from "gatsby"
 import BackgroundImage from "gatsby-background-image"
 import React from "react"
 import styled from "styled-components"
 import Hero from "../components/hero"
+import { FlexCenterBaseGrid } from "../helpers/resusable-styles"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const LandingGrid = styled(Grid)`
-  display: flex;
+const LandingGrid = styled(FlexCenterBaseGrid)`
   flex-direction: row;
-  justify-content: center;
   height: 100%;
 `
 
-const LandingGridContainer = styled(Grid)`
+const LandingGridContainer = styled(FlexCenterBaseGrid)`
   height: 100vh;
-  display: flex;
-  justify-content: center;
   flex-direction: column;
 `
 

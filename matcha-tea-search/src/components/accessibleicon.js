@@ -1,45 +1,39 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { Typography } from "@material-ui/core"
 import React from "react"
+import { Accessible } from "@material-ui/icons"
 import styled from "styled-components"
-import { FlexCenterBaseGrid } from "../helpers/resusable-styles"
-import SubmitForm from "./submitform"
+import { Grid } from "@material-ui/core"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const HeroTypography = styled(Typography)`
-  color: #fff;
-  margin-top: 0.8em;
-  width: fit-content;
-  margin: 0 auto;
-  font-family: Josefin Sans, Arial, sans-serif;
-  background-color: #008000c2;
-  padding: 0.2em 0.3em 0em 0.3em;
-  text-align: center;
-`
-
-const HeroGrid = styled(FlexCenterBaseGrid)`
-  flex-direction: column;
-  padding-top: 3.5em;
+const AttributesDiv = styled(Grid)`
+  display: flex;
+  align-items: center;
+  color: ${props => (props.handicapaccessible ? "#92a3ff" : "red")};
 `
 
 // ---------------------------------------------------------------------------------- //
 
-const Hero = () => (
-  <HeroGrid item sm={12} md={10}>
-    <HeroTypography variant="h1">Matcha Finder</HeroTypography>
-    <HeroTypography variant="subtitle1">Search for local Matcha</HeroTypography>
-    <SubmitForm />
-  </HeroGrid>
-)
+const AccessibleIcon = ({ handicapAccessible }) =>
+  // ? Let the user know whether or not this place of business is wheelchair accessible */}
+  // ? If the 'attributes' array is empty, then display nothing - Yelp's API response returns 'true/false' as a string */}
+  handicapAccessible === "true" ? (
+    <AttributesDiv handicapaccessible={handicapAccessible}>
+      <Accessible /> Accessible
+    </AttributesDiv>
+  ) : handicapAccessible === "false" ? (
+    <AttributesDiv>
+      <Accessible /> Not Accessible
+    </AttributesDiv>
+  ) : null
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-export default Hero
+export default AccessibleIcon
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //

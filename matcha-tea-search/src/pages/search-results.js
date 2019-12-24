@@ -9,23 +9,13 @@ import BusinessDisplay from "../components/businessdisplay"
 import BusinessImage from "../components/businessimage"
 import GoogleMapContainer from "../components/googlemaps"
 import SubmitForm from "../components/submitform"
+import { FlexCenterBaseGrid, PageBackground } from "../helpers/resusable-styles"
 import MatchaIcon from "../images/matcha_icon.png"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const SearchResultsPage = styled(Grid)`
-  background-color: #000000de;
-`
-
-const SearchResultsContainer = styled(Grid)`
-  display: flex;
-  justify-content: center;
-`
-
-const SearchResultsGrid = styled(Grid)`
-  display: flex;
-  justify-content: center;
+const SearchResultsGrid = styled(FlexCenterBaseGrid)`
   flex-direction: column;
   align-items: center;
   @media (min-width: 1260px) {
@@ -61,7 +51,7 @@ const SearchResults = props => {
   }
   const data = props.location.state.data.data.search.business
   return (
-    <SearchResultsPage item>
+    <PageBackground item>
       <Grid container style={{ justifyContent: "center" }}>
         <HomeIconGrid item xs={11} sm={11} md={11}>
           <Typography>
@@ -73,15 +63,15 @@ const SearchResults = props => {
         </HomeIconGrid>
       </Grid>
       <SubmitForm />
-      <SearchResultsContainer container>
+      <FlexCenterBaseGrid container>
         <SearchResultsGrid item lg={6} md={11} sm={11} xs={11}>
           <BusinessDisplay data={data} />
         </SearchResultsGrid>
         <Grid item lg={6} md={11} sm={11} xs={11}>
           <GoogleMapContainer data={data} />
         </Grid>
-      </SearchResultsContainer>
-    </SearchResultsPage>
+      </FlexCenterBaseGrid>
+    </PageBackground>
   )
 }
 

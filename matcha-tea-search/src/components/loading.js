@@ -1,17 +1,16 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { CircularProgress, Grid, Typography } from "@material-ui/core"
+import { CircularProgress, Typography } from "@material-ui/core"
 import React from "react"
 import styled from "styled-components"
+import { FlexCenterBaseGrid } from "../helpers/resusable-styles"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const LoadingGridContainer = styled(Grid)`
+const LoadingGridContainer = styled(FlexCenterBaseGrid)`
   height: 100vh;
-  display: flex;
-  justify-content: center;
   align-items: center;
   opacity: 0.5;
 `

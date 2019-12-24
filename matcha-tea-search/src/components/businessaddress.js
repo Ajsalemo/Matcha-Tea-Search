@@ -4,42 +4,48 @@
 import { Typography } from "@material-ui/core"
 import React from "react"
 import styled from "styled-components"
-import { FlexCenterBaseGrid } from "../helpers/resusable-styles"
-import SubmitForm from "./submitform"
+import { FlexDisplayColumn } from "../helpers/resusable-styles"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const HeroTypography = styled(Typography)`
-  color: #fff;
-  margin-top: 0.8em;
-  width: fit-content;
-  margin: 0 auto;
-  font-family: Josefin Sans, Arial, sans-serif;
-  background-color: #008000c2;
-  padding: 0.2em 0.3em 0em 0.3em;
-  text-align: center;
+const BusinessAddressGrid = styled(FlexDisplayColumn)`
+  align-items: flex-end;
 `
 
-const HeroGrid = styled(FlexCenterBaseGrid)`
-  flex-direction: column;
-  padding-top: 3.5em;
+const BusinessContactInfo = styled(Typography)`
+  color: #92a3ff;
+  font-size: 0.9em;
 `
 
 // ---------------------------------------------------------------------------------- //
 
-const Hero = () => (
-  <HeroGrid item sm={12} md={10}>
-    <HeroTypography variant="h1">Matcha Finder</HeroTypography>
-    <HeroTypography variant="subtitle1">Search for local Matcha</HeroTypography>
-    <SubmitForm />
-  </HeroGrid>
+const BusinessAddress = ({
+  display_phone,
+  address1,
+  city,
+  state,
+  postal_code,
+  country,
+}) => (
+  <BusinessAddressGrid item xs={4} sm={2} lg={4}>
+    <BusinessContactInfo variant="subtitle1">
+      {display_phone}
+    </BusinessContactInfo>
+    <BusinessContactInfo variant="subtitle1">{address1}</BusinessContactInfo>
+    <BusinessContactInfo variant="subtitle1">
+      {city}, {state}
+    </BusinessContactInfo>
+    <BusinessContactInfo variant="subtitle1">
+      {postal_code}, {country}
+    </BusinessContactInfo>
+  </BusinessAddressGrid>
 )
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-export default Hero
+export default BusinessAddress
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
