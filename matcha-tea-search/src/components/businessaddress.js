@@ -37,7 +37,7 @@ const BusinessAddress = ({
       {city}, {state}
     </BusinessContactInfo>
     <BusinessContactInfo variant="subtitle1">
-      {postal_code}, {country}
+      {country} - {postal_code}
     </BusinessContactInfo>
   </BusinessAddressGrid>
 )

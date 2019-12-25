@@ -10,6 +10,7 @@ import BusinessAddress from "../components/businessaddress"
 import BusinessImage from "../components/businessimage"
 import BusinessTitle from "../components/businesstitle"
 import IsBusinessOpen from "../components/isbusinessopen"
+import Reviews from "../components/reviews"
 import SubmitForm from "../components/submitform"
 import { todaysBusinessHours } from "../helpers/helpers"
 import {
@@ -63,10 +64,22 @@ const BusinessPage = props => {
           <AccessibleIcon handicapAccessible={handicapAccessibleBP} />
           <BusinessRatingFormat>
             Rating:{" "}
-            {data.rating
-              ? data.rating
-              : "No one has rated this business yet"}
+            {data.rating ? data.rating : "No one has rated this business yet"}
           </BusinessRatingFormat>
+          <Grid item style={{ paddingTop: '4em' }}>
+            {/* // * If the reviews array is populated, map over it and pass down the values to the 'Reviews' component to display the data */}
+            {data.reviews && data.reviews !== null
+              ? data.reviews.map((review, i) => (
+                  <Reviews
+                    image_url={review.user.image_url}
+                    name={review.user.name}
+                    reviewText={review.text}
+                    rating={review.rating}
+                    key={review.id}
+                  />
+                ))
+              : null}
+          </Grid>
         </SingularBusinessPageGrid>
         <Grid item lg={2}>
           <BusinessAddress
