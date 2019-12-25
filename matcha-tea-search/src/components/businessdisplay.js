@@ -96,14 +96,17 @@ const BusinessDisplay = ({ data }) => {
             </BusinessRatingFormat>
           </NestedBusinessGrid>
         </ImageAndDescriptionsGrid>
-        <BusinessAddress
-          display_phone={business.display_phone}
-          address1={business.location.address1}
-          city={business.location.city}
-          state={business.location.state}
-          postal_code={business.location.postal_code}
-          country={business.location.country}
-        />
+        <Grid item xs={4} sm={2} lg={4}>
+          <BusinessAddress 
+            display_phone={business.display_phone}
+            address1={business.location.address1}
+            city={business.location.city}
+            state={business.location.state}
+            postal_code={business.location.postal_code}
+            country={business.location.country}
+            businessdisplay
+          />
+        </Grid>
       </BusinessGrid>
     )
   })

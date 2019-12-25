@@ -10,7 +10,7 @@ import { FlexDisplayColumn } from "../helpers/resusable-styles"
 // ---------------------------------------------------------------------------------- //
 
 const BusinessAddressGrid = styled(FlexDisplayColumn)`
-  align-items: flex-end;
+  align-items: ${props => props.businessdisplay ? "flex-end" : "flex-start"};
 `
 
 const BusinessContactInfo = styled(Typography)`
@@ -27,8 +27,9 @@ const BusinessAddress = ({
   state,
   postal_code,
   country,
+  businessdisplay
 }) => (
-  <BusinessAddressGrid item xs={4} sm={2} lg={4}>
+  <BusinessAddressGrid businessdisplay={businessdisplay}>
     <BusinessContactInfo variant="subtitle1">
       {display_phone}
     </BusinessContactInfo>

@@ -9,23 +9,32 @@ import AccessibleIcon from "../components/accessibleicon"
 import BusinessAddress from "../components/businessaddress"
 import BusinessImage from "../components/businessimage"
 import BusinessTitle from "../components/businesstitle"
+import HomeLinkIcon from "../components/homelinkicon"
 import IsBusinessOpen from "../components/isbusinessopen"
 import Reviews from "../components/reviews"
 import SubmitForm from "../components/submitform"
 import { todaysBusinessHours } from "../helpers/helpers"
-import {
-  FlexCenterBaseGrid,
-  PageBackground,
-  WeekdayHoursFormat,
-  BusinessRatingFormat,
-} from "../helpers/resusable-styles"
+import { BusinessRatingFormat, FlexCenterBaseGrid, PageBackground, WeekdayHoursFormat } from "../helpers/resusable-styles"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
 const SingularBusinessPageGrid = styled(Grid)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   @media (min-width: 1280px) {
     padding-left: 1em;
+  }
+`
+
+const BusinessPageItemGrid = styled(FlexCenterBaseGrid)`
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 1280px) {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
   }
 `
 
@@ -48,15 +57,27 @@ const BusinessPage = props => {
       : null
 
   return (
-    <PageBackground container>
+    <PageBackground item>
+      {/* // ? - This component is a responsive home icon */}
+      <HomeLinkIcon />
       <SubmitForm />
-      <FlexCenterBaseGrid item lg={12}>
-        <Grid item lg={5}>
+      <BusinessPageItemGrid item md={12} lg={12}>
+        <Grid item md={10} lg={5}>
           <BusinessImage src={data.photos[0]} alt={data.name} height={"auto"} />
         </Grid>
-        <SingularBusinessPageGrid item lg={3}>
+        <SingularBusinessPageGrid item md={10} lg={3}>
           <BusinessTitle>{data.name}</BusinessTitle>
           <IsBusinessOpen isBusinessOpen={isCurrentlyOpenBP} />
+          <Grid item md={12} lg={12}>
+            <BusinessAddress
+              display_phone={data.display_phone}
+              address1={data.location.address1}
+              city={data.location.city}
+              state={data.location.state}
+              postal_code={data.location.postal_code}
+              country={data.location.country}
+            />
+          </Grid>
           <WeekdayHoursFormat gutterBottom>
             {todaysBusinessHours(currentBusinessHoursBP)}
           </WeekdayHoursFormat>
@@ -66,7 +87,7 @@ const BusinessPage = props => {
             Rating:{" "}
             {data.rating ? data.rating : "No one has rated this business yet"}
           </BusinessRatingFormat>
-          <Grid item style={{ paddingTop: '4em' }}>
+          <Grid item style={{ paddingTop: "4em" }} xs={10} sm={10} md={10}>
             {/* // * If the reviews array is populated, map over it and pass down the values to the 'Reviews' component to display the data */}
             {data.reviews && data.reviews !== null
               ? data.reviews.map((review, i) => (
@@ -82,17 +103,7 @@ const BusinessPage = props => {
               : null}
           </Grid>
         </SingularBusinessPageGrid>
-        <Grid item lg={2}>
-          <BusinessAddress
-            display_phone={data.display_phone}
-            address1={data.location.address1}
-            city={data.location.city}
-            state={data.location.state}
-            postal_code={data.location.postal_code}
-            country={data.location.country}
-          />
-        </Grid>
-      </FlexCenterBaseGrid>
+      </BusinessPageItemGrid>
     </PageBackground>
   )
 }

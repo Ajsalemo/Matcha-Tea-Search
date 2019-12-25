@@ -1,16 +1,15 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { Grid, Typography } from "@material-ui/core"
-import { Link, navigate } from "gatsby"
+import { Grid } from "@material-ui/core"
+import { navigate } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import BusinessDisplay from "../components/businessdisplay"
-import BusinessImage from "../components/businessimage"
 import GoogleMapContainer from "../components/googlemaps"
+import HomeLinkIcon from "../components/homelinkicon"
 import SubmitForm from "../components/submitform"
 import { FlexCenterBaseGrid, PageBackground } from "../helpers/resusable-styles"
-import MatchaIcon from "../images/matcha_icon.png"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -21,23 +20,6 @@ const SearchResultsGrid = styled(FlexCenterBaseGrid)`
   @media (min-width: 1260px) {
     padding-left: 1em;
   }
-`
-
-const HomeIconGrid = styled(Grid)`
-  display: flex;
-  padding-top: 0.5em;
-  @media (min-width: 1280px) {
-    display: none;
-  }
-`
-
-const HomeIconNavLink = styled(Link)`
-  text-decoration: none;
-  color: #fff;
-  padding-left: 0.3em;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 `
 
 // ---------------------------------------------------------------------------------- //
@@ -52,16 +34,8 @@ const SearchResults = props => {
   const data = props.location.state.data.data.search.business
   return (
     <PageBackground item>
-      <Grid container style={{ justifyContent: "center" }}>
-        <HomeIconGrid item xs={11} sm={11} md={11}>
-          <Typography>
-            <HomeIconNavLink to="/">
-              <BusinessImage src={MatchaIcon} alt="" />
-              Home
-            </HomeIconNavLink>
-          </Typography>
-        </HomeIconGrid>
-      </Grid>
+      {/* // ? - This component is a responsive home icon */}
+      <HomeLinkIcon />
       <SubmitForm />
       <FlexCenterBaseGrid container>
         <SearchResultsGrid item lg={6} md={11} sm={11} xs={11}>
