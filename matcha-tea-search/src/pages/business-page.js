@@ -75,6 +75,7 @@ const BusinessPage = props => {
                     name={review.user.name}
                     reviewText={review.text}
                     rating={review.rating}
+                    time_created={review.time_created}
                     key={review.id}
                   />
                 ))

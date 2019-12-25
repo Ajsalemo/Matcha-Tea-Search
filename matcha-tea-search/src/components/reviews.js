@@ -10,6 +10,7 @@ import {
   FlexDisplayRow,
 } from "../helpers/resusable-styles"
 import BusinessImage from "../components/businessimage"
+import moment from "moment"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -28,11 +29,12 @@ const ReviewGrid = styled(FlexDisplayRow)`
 const SecondaryReviewText = styled(Typography)`
   padding: 0em 0em 0em 0.5em;
   font-size: 0.9em;
+  color: ${props => props.timecreatedtext ? "#fff" : null}
 `
 
 // ---------------------------------------------------------------------------------- //
 
-const Reviews = ({ image_url, name, reviewText, rating }) => (
+const Reviews = ({ image_url, name, reviewText, rating, time_created }) => (
   <ReviewGrid item>
     <Avatar>
         <BusinessImage src={image_url} alt={`${name}'s avatar`} />
@@ -50,6 +52,7 @@ const Reviews = ({ image_url, name, reviewText, rating }) => (
           </SecondaryReviewText>
         )}
       </Grid>
+        <SecondaryReviewText timecreatedtext>{moment(time_created, "YYYY-MM-DD, hh:mm:ss a").format("MMMM Do YYYY, h:mm a")}</SecondaryReviewText>
       <BusinessRatingFormat>{reviewText}</BusinessRatingFormat>
     </FlexDisplayColumn>
   </ReviewGrid>
