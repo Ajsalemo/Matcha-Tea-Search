@@ -71,13 +71,13 @@ const BusinessDisplay = ({ data }) => {
             <BusinessTitle variant="h2">
               {i + 1}. {business.name}
             </BusinessTitle>
-            <IsBusinessOpen isBusinessOpen={isBusinessOpen} />
+            <IsBusinessOpen isBusinessOpen={isBusinessOpen ? 1 : 0} />
             {/* // ? This component displays the business hours for the week */}
             <WeekdayHoursFormat gutterBottom key={business.alias}>
               {todaysBusinessHours(currentBusinessHours)}
             </WeekdayHoursFormat>
             <Typography style={{ color: "#fff" }}>{business.price}</Typography>
-            <AccessibleIcon handicapAccessible={handicapAccessible} />
+            <AccessibleIcon handicapAccessible={handicapAccessible ? 1 : 0} />
             <BusinessRatingFormat>
               Rating:{" "}
               {business.rating

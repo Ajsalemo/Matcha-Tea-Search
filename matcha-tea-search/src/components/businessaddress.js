@@ -29,7 +29,7 @@ const BusinessAddress = ({
   country,
   businessdisplay
 }) => (
-  <BusinessAddressGrid businessdisplay={businessdisplay}>
+  <BusinessAddressGrid businessdisplay={businessdisplay ? 1 : 0}>
     <BusinessContactInfo variant="subtitle1">
       {display_phone}
     </BusinessContactInfo>

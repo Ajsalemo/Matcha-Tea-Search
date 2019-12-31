@@ -21,7 +21,7 @@ const AccessibleIcon = ({ handicapAccessible }) =>
   // ? Let the user know whether or not this place of business is wheelchair accessible */}
   // ? If the 'attributes' array is empty, then display nothing - Yelp's API response returns 'true/false' as a string */}
   handicapAccessible === "true" ? (
-    <AttributesDiv handicapaccessible={handicapAccessible}>
+    <AttributesDiv handicapaccessible={handicapAccessible ? 1 : 0}>
       <Accessible /> Accessible
     </AttributesDiv>
   ) : handicapAccessible === "false" ? (

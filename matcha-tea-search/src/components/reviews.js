@@ -52,7 +52,7 @@ const Reviews = ({ image_url, name, reviewText, rating, time_created }) => (
           </SecondaryReviewText>
         )}
       </Grid>
-        <SecondaryReviewText timecreatedtext>{moment(time_created, "YYYY-MM-DD, hh:mm:ss a").format("MMMM Do YYYY, h:mm a")}</SecondaryReviewText>
+        <SecondaryReviewText timecreatedtext={1}>{moment(time_created, "YYYY-MM-DD, hh:mm:ss a").format("MMMM Do YYYY, h:mm a")}</SecondaryReviewText>
       <BusinessRatingFormat>{reviewText}</BusinessRatingFormat>
     </FlexDisplayColumn>
   </ReviewGrid>

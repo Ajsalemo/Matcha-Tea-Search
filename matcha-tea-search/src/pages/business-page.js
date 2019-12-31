@@ -67,7 +67,7 @@ const BusinessPage = props => {
         </Grid>
         <SingularBusinessPageGrid item md={10} lg={3}>
           <BusinessTitle>{data.name}</BusinessTitle>
-          <IsBusinessOpen isBusinessOpen={isCurrentlyOpenBP} />
+          <IsBusinessOpen isBusinessOpen={isCurrentlyOpenBP ? 1 : 0} />
           <Grid item md={12} lg={12}>
             <BusinessAddress
               display_phone={data.display_phone}
@@ -82,7 +82,7 @@ const BusinessPage = props => {
             {todaysBusinessHours(currentBusinessHoursBP)}
           </WeekdayHoursFormat>
           <Typography style={{ color: "#fff" }}>{data.price}</Typography>
-          <AccessibleIcon handicapAccessible={handicapAccessibleBP} />
+          <AccessibleIcon handicapAccessible={handicapAccessibleBP ? 1 : 0} />
           <BusinessRatingFormat>
             Rating:{" "}
             {data.rating ? data.rating : "No one has rated this business yet"}
