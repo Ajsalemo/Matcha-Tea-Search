@@ -6,12 +6,17 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import BusinessAddress from "../components/businessaddress"
-import { todaysBusinessHours } from "../helpers/helpers"
-import { FlexDisplayColumn, WeekdayHoursFormat, BusinessRatingFormat } from "../helpers/resusable-styles"
+import { todaysBusinessHours, retrieveCurrentLocation } from "../helpers/helpers"
+import {
+  FlexDisplayColumn,
+  WeekdayHoursFormat,
+  BusinessRatingFormat,
+} from "../helpers/resusable-styles"
 import AccessibleIcon from "./accessibleicon"
 import BusinessImage from "./businessimage"
 import BusinessTitle from "./businesstitle"
 import IsBusinessOpen from "./isbusinessopen"
+import { Satellite } from "@material-ui/icons"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -29,11 +34,21 @@ const ImageAndDescriptionsGrid = styled(FlexDisplayColumn)`
     flex-direction: row;
   }
 `
-
-const NestedBusinessGrid = styled(Grid)`
-  display: flex;
+const NestedBusinessGrid = styled(FlexDisplayColumn)`
   padding-left: 0.4em;
-  flex-direction: column;
+`
+const DirectionsGrid = styled(FlexDisplayColumn)`
+  justify-content: space-between;
+`
+const DirectionsText = styled.p`
+  display: flex;
+  justify-content: flex-end;
+  color: #fff;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `
 
 // ---------------------------------------------------------------------------------- //
@@ -96,8 +111,8 @@ const BusinessDisplay = ({ data }) => {
             </BusinessRatingFormat>
           </NestedBusinessGrid>
         </ImageAndDescriptionsGrid>
-        <Grid item xs={4} sm={2} lg={4}>
-          <BusinessAddress 
+        <DirectionsGrid item xs={4} sm={2} lg={4}>
+          <BusinessAddress
             display_phone={business.display_phone}
             address1={business.location.address1}
             city={business.location.city}
@@ -106,7 +121,10 @@ const BusinessDisplay = ({ data }) => {
             country={business.location.country}
             businessdisplay
           />
-        </Grid>
+          <DirectionsText onClick={() => retrieveCurrentLocation(business.coordinates.latitude, business.coordinates.longitude)}>
+            Directions <Satellite style={{ color: "#92a3ff" }}/>
+          </DirectionsText>
+        </DirectionsGrid>
       </BusinessGrid>
     )
   })

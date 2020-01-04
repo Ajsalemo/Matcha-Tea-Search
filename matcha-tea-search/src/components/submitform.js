@@ -7,7 +7,7 @@ import { Search } from "@material-ui/icons"
 import { Location } from "@reach/router"
 import { ErrorMessage, Form, Formik } from "formik"
 import { Link, navigate } from "gatsby"
-import React from "react"
+import React, { Fragment } from "react"
 import styled from "styled-components"
 import * as Yup from "yup"
 import { LOCATION_SEARCH } from "../apollo/apolloqueries"
@@ -29,7 +29,6 @@ const SearchIcon = styled(Search)`
     cursor: pointer;
   }
 `
-
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: row;
@@ -42,15 +41,15 @@ const StyledForm = styled(Form)`
 const SubmitButton = styled(Button)`
   min-width: 0em;
 `
-
 const ErrorDiv = styled.div`
   background-color: #fff;
   padding: 0em 1.5em;
   font-weight: bold;
   color: red;
   border: 1px solid red;
+  width: fit-content;
+  margin: 0em auto 0.5em auto;
 `
-
 const HomeLinkLargeScreen = styled(Link)`
   display: none;
   @media (min-width: 1280px) {
@@ -106,56 +105,58 @@ const SubmitForm = () => {
       }}
     >
       {({ values, handleChange, isSubmitting }) => (
-        <StyledForm>
-          {/* // * This 'Location' component is specifically from Gatsby itself. It gives the current pathname, amongst other location(url, path) details */}
-          {/* // * If the current path is '/search-results', then render the home icon link. If the path is '/', which is the landing/home page. Do not render the icon */}
-          <Location>
-            {({ location }) =>
-              location.pathname !== "/" ? (
-                <HomeLinkLargeScreen to="/">
-                  <BusinessImage src={MatchaIcon} alt="" />
-                  Home
-                </HomeLinkLargeScreen>
-              ) : null
-            }
-          </Location>
-          <TextfieldInput
-            name="search"
-            id="search-for-location"
-            label="Search for locations"
-            placeholder="Ex. Charlotte, NC"
-            margin="normal"
-            variant="filled"
-            value={values.search}
-            onChange={handleChange}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <LimitSelect
-                    results={values.results}
-                    handleChange={handleChange}
-                  />
-                  <RadiusSelect
-                    // * Yelp's API defines their radius in meters
-                    radius={values.radius}
-                    handleChange={handleChange}
-                  />
-                  {isSubmitting ? (
-                    <CircularProgress />
-                  ) : (
-                    <SubmitButton type="submit" disabled={isSubmitting}>
-                      <SearchIcon />
-                    </SubmitButton>
-                  )}
-                </InputAdornment>
-              ),
-            }}
-          />
-          {/* // * Formik's error state can be accessed through the callback in this component */}
+        <Fragment>
+          <StyledForm>
+            {/* // * This 'Location' component is specifically from Gatsby itself. It gives the current pathname, amongst other location(url, path) details */}
+            {/* // * If the current path is '/search-results', then render the home icon link. If the path is '/', which is the landing/home page. Do not render the icon */}
+            <Location>
+              {({ location }) =>
+                location.pathname !== "/" ? (
+                  <HomeLinkLargeScreen to="/">
+                    <BusinessImage src={MatchaIcon} alt="" />
+                    Home
+                  </HomeLinkLargeScreen>
+                ) : null
+              }
+            </Location>
+            <TextfieldInput
+              name="search"
+              id="search-for-location"
+              label="Search for locations"
+              placeholder="Ex. Charlotte, NC"
+              margin="normal"
+              variant="filled"
+              value={values.search}
+              onChange={handleChange}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <LimitSelect
+                      results={values.results}
+                      handleChange={handleChange}
+                    />
+                    <RadiusSelect
+                      // * Yelp's API defines their radius in meters
+                      radius={values.radius}
+                      handleChange={handleChange}
+                    />
+                    {isSubmitting ? (
+                      <CircularProgress />
+                    ) : (
+                      <SubmitButton type="submit" disabled={isSubmitting}>
+                        <SearchIcon />
+                      </SubmitButton>
+                    )}
+                  </InputAdornment>
+                ),
+              }}
+            />
+            {/* // * Formik's error state can be accessed through the callback in this component */}
+          </StyledForm>
           <ErrorMessage name="search">
             {err => <ErrorDiv>{err}</ErrorDiv>}
           </ErrorMessage>
-        </StyledForm>
+        </Fragment>
       )}
     </Formik>
   )
