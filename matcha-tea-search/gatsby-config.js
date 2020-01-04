@@ -18,12 +18,27 @@ module.exports = {
         fonts: [
           {
             family: `Josefin Sans`,
-            variants: [`400`, `700`]
-          }
-        ]
-      }
+            variants: [`400`, `700`],
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images/`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: {
+        prefixes: [`/business-page/*`],
+      },
     },
     `gatsby-plugin-styled-components`,
-    `gatsby-theme-material-ui`
-  ]
+    `gatsby-theme-material-ui`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+  ],
 }

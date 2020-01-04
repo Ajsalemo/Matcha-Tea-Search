@@ -1,45 +1,45 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { Typography } from "@material-ui/core"
+import { CircularProgress, Typography } from "@material-ui/core"
 import React from "react"
 import styled from "styled-components"
 import { FlexCenterBaseGrid } from "../helpers/resusable-styles"
-import SubmitForm from "./submitform"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const HeroTypography = styled(Typography)`
-  color: #fff;
-  margin-top: 0.8em;
-  width: fit-content;
-  margin: 0 auto;
-  font-family: Josefin Sans, Arial, sans-serif;
-  background-color: #008000c2;
-  padding: 0.2em 0.3em 0em 0.3em;
-  text-align: center;
+const LoadingGridContainer = styled(FlexCenterBaseGrid)`
+  height: 100vh;
+  align-items: center;
+  opacity: 0.5;
 `
 
-const HeroGrid = styled(FlexCenterBaseGrid)`
-  flex-direction: column;
-  padding-top: 3.5em;
+// ! - Need a way to get rid of these important flags
+const LoadingIndicator = styled(CircularProgress)`
+  color: #000 !important;
+  width: 60px !important;
+  height: 60px !important;
+`
+
+// ! - Need a way to get rid of these important flags
+const LoadingText = styled(Typography)`
+  font-family: Josefin Sans, Arial, sans-serif !important;
+  padding-left: 0.5em;
 `
 
 // ---------------------------------------------------------------------------------- //
 
-const Hero = () => (
-  <HeroGrid item sm={12} md={10}>
-    <HeroTypography variant="h1">Matcha Finder</HeroTypography>
-    <HeroTypography variant="subtitle1">Search for local Matcha</HeroTypography>
-    <SubmitForm />
-  </HeroGrid>
+const Loading = () => (
+  <LoadingGridContainer container>
+    <LoadingIndicator /> <LoadingText variant="h6">Loading..</LoadingText>
+  </LoadingGridContainer>
 )
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-export default Hero
+export default Loading
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //

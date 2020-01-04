@@ -1,45 +1,32 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { Typography } from "@material-ui/core"
 import React from "react"
+import { LazyLoadImage } from "react-lazy-load-image-component"
+import "react-lazy-load-image-component/src/effects/blur.css"
 import styled from "styled-components"
-import { FlexCenterBaseGrid } from "../helpers/resusable-styles"
-import SubmitForm from "./submitform"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const HeroTypography = styled(Typography)`
-  color: #fff;
-  margin-top: 0.8em;
-  width: fit-content;
-  margin: 0 auto;
-  font-family: Josefin Sans, Arial, sans-serif;
-  background-color: #008000c2;
-  padding: 0.2em 0.3em 0em 0.3em;
-  text-align: center;
-`
-
-const HeroGrid = styled(FlexCenterBaseGrid)`
-  flex-direction: column;
-  padding-top: 3.5em;
+const StyledLazyLoadImage = styled(LazyLoadImage)`
+    border-radius: 0.5em;
+    width: 100%;
 `
 
 // ---------------------------------------------------------------------------------- //
 
-const Hero = () => (
-  <HeroGrid item sm={12} md={10}>
-    <HeroTypography variant="h1">Matcha Finder</HeroTypography>
-    <HeroTypography variant="subtitle1">Search for local Matcha</HeroTypography>
-    <SubmitForm />
-  </HeroGrid>
+// ? - Implemented this package due to 'gatsby-image' not being able to parse absolute file paths
+// ? - Since the landing page background image utilizes gatsby image and gatsby background image, and consistency was needed with the blur-up effect
+// ? - This package will still be able to create a blur-up effect for each image on load, including lazy loading images on larger result sizes
+const BusinessImage = ({ src, alt, height }) => (
+  <StyledLazyLoadImage alt={alt} src={src} height={height} effect="blur" />
 )
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-export default Hero
+export default BusinessImage
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //

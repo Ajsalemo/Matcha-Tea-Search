@@ -1,45 +1,52 @@
 // ----------------------------------- Imports -------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-import { Typography } from "@material-ui/core"
+import { Grid, Typography } from "@material-ui/core"
+import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
-import { FlexCenterBaseGrid } from "../helpers/resusable-styles"
-import SubmitForm from "./submitform"
+import BusinessImage from "../components/businessimage"
+import MatchaIcon from "../images/matcha_icon.png"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const HeroTypography = styled(Typography)`
+const HomeIconGrid = styled(Grid)`
+  display: flex;
+  padding-top: 0.5em;
+  @media (min-width: 1280px) {
+    display: none;
+  }
+`
+
+const HomeIconNavLink = styled(Link)`
+  text-decoration: none;
   color: #fff;
-  margin-top: 0.8em;
-  width: fit-content;
-  margin: 0 auto;
-  font-family: Josefin Sans, Arial, sans-serif;
-  background-color: #008000c2;
-  padding: 0.2em 0.3em 0em 0.3em;
-  text-align: center;
-`
-
-const HeroGrid = styled(FlexCenterBaseGrid)`
-  flex-direction: column;
-  padding-top: 3.5em;
+  padding-left: 0.3em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 // ---------------------------------------------------------------------------------- //
 
-const Hero = () => (
-  <HeroGrid item sm={12} md={10}>
-    <HeroTypography variant="h1">Matcha Finder</HeroTypography>
-    <HeroTypography variant="subtitle1">Search for local Matcha</HeroTypography>
-    <SubmitForm />
-  </HeroGrid>
+const HomeLinkIcon = () => (
+  <Grid container style={{ justifyContent: "center" }}>
+    <HomeIconGrid item xs={11} sm={11} md={11}>
+      <Typography>
+        <HomeIconNavLink to="/">
+          <BusinessImage src={MatchaIcon} alt="" />
+          Home
+        </HomeIconNavLink>
+      </Typography>
+    </HomeIconGrid>
+  </Grid>
 )
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-export default Hero
+export default HomeLinkIcon
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
