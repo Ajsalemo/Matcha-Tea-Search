@@ -15,6 +15,7 @@ import Reviews from "../components/reviews"
 import SubmitForm from "../components/submitform"
 import { todaysBusinessHours } from "../helpers/helpers"
 import { BusinessRatingFormat, FlexCenterBaseGrid, PageBackground, WeekdayHoursFormat } from "../helpers/resusable-styles"
+import Footer from "../components/footer"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -37,7 +38,6 @@ const BusinessPageItemGrid = styled(FlexCenterBaseGrid)`
     align-items: end;
   }
 `
-
 // ---------------------------------------------------------------------------------- //
 
 const BusinessPage = props => {
@@ -46,7 +46,6 @@ const BusinessPage = props => {
     return null
   }
   const data = props.location.state.data
-  console.log(data)
   // ? Test the object for nested arrays before defining
   const isCurrentlyOpenBP = data.hours[0] ? data.hours[0].is_open_now : null
   const currentBusinessHoursBP = data.hours[0] ? data.hours[0].open : null
@@ -104,6 +103,7 @@ const BusinessPage = props => {
           </Grid>
         </SingularBusinessPageGrid>
       </BusinessPageItemGrid>
+      <Footer />
     </PageBackground>
   )
 }

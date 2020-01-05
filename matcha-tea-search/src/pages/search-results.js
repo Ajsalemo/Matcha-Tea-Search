@@ -10,6 +10,7 @@ import GoogleMapContainer from "../components/googlemaps"
 import HomeLinkIcon from "../components/homelinkicon"
 import SubmitForm from "../components/submitform"
 import { FlexCenterBaseGrid, PageBackground } from "../helpers/resusable-styles"
+import Footer from "../components/footer"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -45,6 +46,7 @@ const SearchResults = props => {
           <GoogleMapContainer data={data} />
         </Grid>
       </FlexCenterBaseGrid>
+      <Footer />
     </PageBackground>
   )
 }
