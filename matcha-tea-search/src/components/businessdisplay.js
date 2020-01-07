@@ -2,21 +2,24 @@
 // ---------------------------------------------------------------------------------- //
 
 import { Grid, Typography } from "@material-ui/core"
+import { Satellite } from "@material-ui/icons"
 import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import BusinessAddress from "../components/businessaddress"
-import { todaysBusinessHours, retrieveCurrentLocation } from "../helpers/helpers"
 import {
+  retrieveCurrentLocation,
+  todaysBusinessHours,
+} from "../helpers/helpers"
+import {
+  BusinessRatingFormat,
   FlexDisplayColumn,
   WeekdayHoursFormat,
-  BusinessRatingFormat,
 } from "../helpers/resusable-styles"
 import AccessibleIcon from "./accessibleicon"
 import BusinessImage from "./businessimage"
 import BusinessTitle from "./businesstitle"
 import IsBusinessOpen from "./isbusinessopen"
-import { Satellite } from "@material-ui/icons"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -28,7 +31,6 @@ const BusinessGrid = styled(Grid)`
   border-radius: 1em;
   padding: 0.7em;
 `
-
 const ImageAndDescriptionsGrid = styled(FlexDisplayColumn)`
   @media (min-width: 600px) {
     flex-direction: row;
@@ -49,6 +51,10 @@ const DirectionsText = styled.p`
     cursor: pointer;
     text-decoration: underline;
   }
+`
+const BusinessPageLink = styled(Link)`
+  color: #92a3ff;
+  padding-left: 0.4em;
 `
 
 // ---------------------------------------------------------------------------------- //
@@ -101,13 +107,9 @@ const BusinessDisplay = ({ data }) => {
             </BusinessRatingFormat>
             <BusinessRatingFormat>
               "{reviewExcerpt}"
-              <Link
-                to="/business-page/"
-                state={{ data: business }}
-                style={{ paddingLeft: "0.4em" }}
-              >
+              <BusinessPageLink to="/business-page/" state={{ data: business }}>
                 more
-              </Link>
+              </BusinessPageLink>
             </BusinessRatingFormat>
           </NestedBusinessGrid>
         </ImageAndDescriptionsGrid>
@@ -121,8 +123,15 @@ const BusinessDisplay = ({ data }) => {
             country={business.location.country}
             businessdisplay
           />
-          <DirectionsText onClick={() => retrieveCurrentLocation(business.coordinates.latitude, business.coordinates.longitude)}>
-            Directions <Satellite style={{ color: "#92a3ff" }}/>
+          <DirectionsText
+            onClick={() =>
+              retrieveCurrentLocation(
+                business.coordinates.latitude,
+                business.coordinates.longitude
+              )
+            }
+          >
+            Directions <Satellite style={{ color: "#92a3ff" }} />
           </DirectionsText>
         </DirectionsGrid>
       </BusinessGrid>

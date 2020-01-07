@@ -22,7 +22,6 @@ const SearchResultsGrid = styled(FlexCenterBaseGrid)`
     padding-left: 1em;
   }
 `
-
 // ---------------------------------------------------------------------------------- //
 
 const SearchResults = props => {

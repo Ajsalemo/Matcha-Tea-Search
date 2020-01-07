@@ -106,7 +106,7 @@ const SubmitForm = () => {
     >
       {({ values, handleChange, isSubmitting }) => (
         <Fragment>
-          <StyledForm>
+          <StyledForm id="top">
             {/* // * This 'Location' component is specifically from Gatsby itself. It gives the current pathname, amongst other location(url, path) details */}
             {/* // * If the current path is '/search-results', then render the home icon link. If the path is '/', which is the landing/home page. Do not render the icon */}
             <Location>
