@@ -6,11 +6,11 @@ import { navigate } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import BusinessDisplay from "../components/businessdisplay"
+import Footer from "../components/footer"
 import GoogleMapContainer from "../components/googlemaps"
 import HomeLinkIcon from "../components/homelinkicon"
 import SubmitForm from "../components/submitform"
 import { FlexCenterBaseGrid, PageBackground } from "../helpers/resusable-styles"
-import Footer from "../components/footer"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //

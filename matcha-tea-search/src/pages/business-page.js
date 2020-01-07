@@ -2,6 +2,7 @@
 // ---------------------------------------------------------------------------------- //
 
 import { Grid, Typography } from "@material-ui/core"
+import { Satellite } from "@material-ui/icons"
 import { navigate } from "gatsby"
 import React from "react"
 import styled from "styled-components"
@@ -9,13 +10,19 @@ import AccessibleIcon from "../components/accessibleicon"
 import BusinessAddress from "../components/businessaddress"
 import BusinessImage from "../components/businessimage"
 import BusinessTitle from "../components/businesstitle"
+import Directions from "../components/directions"
+import Footer from "../components/footer"
 import HomeLinkIcon from "../components/homelinkicon"
 import IsBusinessOpen from "../components/isbusinessopen"
 import Reviews from "../components/reviews"
 import SubmitForm from "../components/submitform"
 import { todaysBusinessHours } from "../helpers/helpers"
-import { BusinessRatingFormat, FlexCenterBaseGrid, PageBackground, WeekdayHoursFormat } from "../helpers/resusable-styles"
-import Footer from "../components/footer"
+import {
+  BusinessRatingFormat,
+  FlexCenterBaseGrid,
+  PageBackground,
+  WeekdayHoursFormat,
+} from "../helpers/resusable-styles"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -86,6 +93,15 @@ const BusinessPage = props => {
             Rating:{" "}
             {data.rating ? data.rating : "No one has rated this business yet"}
           </BusinessRatingFormat>
+          {/* // * This component consists of Google's Maps URL - depending on the device being used, this will pop open the Maps application if it's installed on the users device
+              // * If it isn't, it will open itself in the browser. Both implementations will give directions, the actual Maps application will give turn-by-turn directions
+          */}
+          <Directions
+            lat={data.coordinates.latitude}
+            lng={data.coordinates.longitude}
+          >
+            Directions <Satellite style={{ color: "#92a3ff" }} />
+          </Directions>
           <Grid item style={{ paddingTop: "4em" }} xs={10} sm={10} md={10}>
             {/* // * If the reviews array is populated, map over it and pass down the values to the 'Reviews' component to display the data */}
             {data.reviews && data.reviews !== null

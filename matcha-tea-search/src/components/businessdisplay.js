@@ -7,10 +7,7 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import BusinessAddress from "../components/businessaddress"
-import {
-  retrieveCurrentLocation,
-  todaysBusinessHours,
-} from "../helpers/helpers"
+import { todaysBusinessHours } from "../helpers/helpers"
 import {
   BusinessRatingFormat,
   FlexDisplayColumn,
@@ -19,6 +16,7 @@ import {
 import AccessibleIcon from "./accessibleicon"
 import BusinessImage from "./businessimage"
 import BusinessTitle from "./businesstitle"
+import Directions from "./directions"
 import IsBusinessOpen from "./isbusinessopen"
 
 // ---------------------------------------------------------------------------------- //
@@ -41,16 +39,6 @@ const NestedBusinessGrid = styled(FlexDisplayColumn)`
 `
 const DirectionsGrid = styled(FlexDisplayColumn)`
   justify-content: space-between;
-`
-const DirectionsText = styled.p`
-  display: flex;
-  justify-content: flex-end;
-  color: #fff;
-  align-items: center;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
 `
 const BusinessPageLink = styled(Link)`
   color: #92a3ff;
@@ -123,16 +111,15 @@ const BusinessDisplay = ({ data }) => {
             country={business.location.country}
             businessdisplay
           />
-          <DirectionsText
-            onClick={() =>
-              retrieveCurrentLocation(
-                business.coordinates.latitude,
-                business.coordinates.longitude
-              )
-            }
+          {/* // * This component consists of Google's Maps URL - depending on the device being used, this will pop open the Maps application if it's installed on the users device
+              // * If it isn't, it will open itself in the browser. Both implementations will give directions, the actual Maps application will give turn-by-turn directions
+          */}
+          <Directions
+            lat={business.coordinates.latitude}
+            lng={business.coordinates.longitude}
           >
             Directions <Satellite style={{ color: "#92a3ff" }} />
-          </DirectionsText>
+          </Directions>
         </DirectionsGrid>
       </BusinessGrid>
     )

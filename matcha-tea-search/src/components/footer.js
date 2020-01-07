@@ -5,9 +5,9 @@ import { faGithub, faGoogle, faYelp } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AppBar, Grid, Toolbar } from "@material-ui/core"
 import { Link } from "gatsby"
+import scrollTo from "gatsby-plugin-smoothscroll"
 import React from "react"
 import styled from "styled-components"
-import scrollTo from 'gatsby-plugin-smoothscroll';
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -56,7 +56,7 @@ const FooterLinkGrid = styled(Grid)`
 `
 const FooterSpan = styled.span`
   &:hover {
-      cursor: pointer;
+    cursor: pointer;
   }
 `
 // ---------------------------------------------------------------------------------- //
@@ -68,7 +68,7 @@ const Footer = () => (
         <FooterLink to="/">Home</FooterLink>
         {"|"}
         {/* // ? - 'scrollTo' provides a smooth scrolling effect to anchor elements on the page */}
-        <FooterSpan onClick={() => scrollTo('#top')}>Back to top</FooterSpan>
+        <FooterSpan onClick={() => scrollTo("#top")}>Back to top</FooterSpan>
       </FooterLinkGrid>
       <SocialIconsGrid item>
         <a
