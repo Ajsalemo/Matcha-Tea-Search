@@ -59,7 +59,6 @@ const HomeLinkLargeScreen = styled(Link)`
     flex-direction: column;
   }
 `
-
 // ---------------------------------------------------------------------------------- //
 
 const SubmitFormValidationSchema = Yup.object().shape({
@@ -122,7 +121,9 @@ const SubmitForm = () => {
             <TextfieldInput
               name="search"
               id="search-for-location"
-              label="Search for locations"
+              label={
+                <span style={{ color: "#000" }}>Search for locations</span>
+              }
               placeholder="Ex. Charlotte, NC"
               margin="normal"
               variant="filled"
@@ -143,7 +144,11 @@ const SubmitForm = () => {
                     {isSubmitting ? (
                       <CircularProgress />
                     ) : (
-                      <SubmitButton type="submit" disabled={isSubmitting}>
+                      <SubmitButton
+                        type="submit"
+                        disabled={isSubmitting}
+                        aria-label="Submit form"
+                      >
                         <SearchIcon />
                       </SubmitButton>
                     )}

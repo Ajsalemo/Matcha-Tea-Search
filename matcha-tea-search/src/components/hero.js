@@ -16,7 +16,7 @@ const HeroTypography = styled(Typography)`
   width: fit-content;
   margin: 0 auto;
   font-family: Josefin Sans, Arial, sans-serif;
-  background-color: #008000c2;
+  background-color: #007300e6;
   padding: 0.2em 0.3em 0em 0.3em;
   text-align: center;
 `

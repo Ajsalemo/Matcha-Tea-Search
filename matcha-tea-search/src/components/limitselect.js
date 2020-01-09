@@ -10,6 +10,7 @@ import styled from "styled-components"
 
 const StyledLimitSelect = styled(InputLabel)`
   font-size: 0.7em;
+  color: #000;
 `
 
 const ParentSelectGrid = styled(Grid)`

@@ -10,6 +10,7 @@ import styled from "styled-components"
 
 const StypedInputLabel = styled(InputLabel)`
   font-size: 0.7em;
+  color: #000;
 `
 
 const ParentRadiusGrid = styled(Grid)`
@@ -30,9 +31,9 @@ const RadiusSelect = ({ radius, handleChange }) => (
       onChange={handleChange}
     >
       {/* 
-                // * Yelp's API defines their radius in meters 
-                // * These values have been converted from Miles to Meters
-            */}
+        // * Yelp's API defines their radius in meters 
+        // * These values have been converted from Miles to Meters
+      */}
       <MenuItem value={1610}>1</MenuItem>
       <MenuItem value={8047}>5</MenuItem>
       <MenuItem value={16094}>10</MenuItem>
