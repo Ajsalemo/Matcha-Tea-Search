@@ -68,12 +68,14 @@ const BusinessDisplay = ({ data }) => {
       <BusinessGrid item sm={12} md={12} lg={12} key={business.alias}>
         <ImageAndDescriptionsGrid item xs={10} sm={12} lg={10}>
           <Grid item xs={10} sm={10} lg={6}>
-            <BusinessImage
-              src={business.photos[0]}
-              alt={business.name}
-              key={business.id}
-              height={320}
-            />
+            <Link to="/business-page/" state={{ data: business }}>
+              <BusinessImage
+                src={business.photos[0]}
+                alt={business.name}
+                key={business.id}
+                height={320}
+              />
+            </Link>
           </Grid>
           <NestedBusinessGrid item xs={12} sm={12} lg={6}>
             {/* // ? - 'i + 1' is used as a numbered list, started from 1 - these numbers are also displayed on Google Maps to associate the businesses with the displayed markers */}
