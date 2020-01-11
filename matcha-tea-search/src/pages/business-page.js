@@ -49,7 +49,7 @@ const BusinessPageItemGrid = styled(FlexCenterBaseGrid)`
 // ---------------------------------------------------------------------------------- //
 
 const BusinessPage = props => {
-  useEffect(() => {
+  if (typeof window !== `undefined`) {
     if (!props.location.state) {
       navigate("/")
       return null
@@ -111,8 +111,8 @@ const BusinessPage = props => {
                   : "No one has rated this business yet"}
               </BusinessRatingFormat>
               {/* // * This component consists of Google's Maps URL - depending on the device being used, this will pop open the Maps application if it's installed on the users device
-                // * If it isn't, it will open itself in the browser. Both implementations will give directions, the actual Maps application will give turn-by-turn directions
-            */}
+          // * If it isn't, it will open itself in the browser. Both implementations will give directions, the actual Maps application will give turn-by-turn directions
+      */}
               <Directions
                 lat={data.coordinates.latitude}
                 lng={data.coordinates.longitude}
@@ -140,7 +140,7 @@ const BusinessPage = props => {
         </PageBackground>
       </Fragment>
     )
-  })
+  }
 }
 
 // ---------------------------------------------------------------------------------- //
