@@ -49,7 +49,7 @@ const BusinessPageItemGrid = styled(FlexCenterBaseGrid)`
 // ---------------------------------------------------------------------------------- //
 
 const BusinessPage = props => {
-  if (!props.location.state) {
+  if (!props.location.state && typeof window !== `undefined`) {
     navigate("/")
     return null
   }

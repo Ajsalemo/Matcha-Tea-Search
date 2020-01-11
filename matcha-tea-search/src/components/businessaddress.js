@@ -11,8 +11,8 @@ import { FlexDisplayColumn } from "../helpers/resusable-styles"
 
 const BusinessAddressGrid = styled(FlexDisplayColumn)`
   align-items: ${props => props.businessdisplay ? "flex-end" : "flex-start"};
+  text-align: right;
 `
-
 const BusinessContactInfo = styled(Typography)`
   color: #92a3ff;
   font-size: 0.9em;
