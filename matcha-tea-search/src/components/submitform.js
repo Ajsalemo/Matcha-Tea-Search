@@ -23,7 +23,10 @@ const TextfieldInput = styled(TextField)`
   width: 90%;
   background-color: #fff;
 `
-
+const PlaceholderSpan = styled.span`
+  color: #000;
+  font-size: 0.9em;
+`
 const SearchIcon = styled(Search)`
   &:hover {
     cursor: pointer;
@@ -122,7 +125,7 @@ const SubmitForm = () => {
               name="search"
               id="search-for-location"
               label={
-                <span style={{ color: "#000" }}>Search for locations</span>
+                <PlaceholderSpan>Search for locations</PlaceholderSpan>
               }
               placeholder="Ex. Charlotte, NC"
               margin="normal"

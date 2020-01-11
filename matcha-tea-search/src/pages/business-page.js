@@ -4,7 +4,7 @@
 import { Grid, Typography } from "@material-ui/core"
 import { Satellite } from "@material-ui/icons"
 import { navigate } from "gatsby"
-import React, { Fragment, useEffect } from "react"
+import React, { Fragment } from "react"
 import styled from "styled-components"
 import AccessibleIcon from "../components/accessibleicon"
 import BusinessAddress from "../components/businessaddress"
@@ -15,15 +15,10 @@ import Footer from "../components/footer"
 import HomeLinkIcon from "../components/homelinkicon"
 import IsBusinessOpen from "../components/isbusinessopen"
 import Reviews from "../components/reviews"
+import SEO from "../components/SEO"
 import SubmitForm from "../components/submitform"
 import { todaysBusinessHours } from "../helpers/helpers"
-import {
-  BusinessRatingFormat,
-  FlexCenterBaseGrid,
-  PageBackground,
-  WeekdayHoursFormat,
-} from "../helpers/resusable-styles"
-import SEO from "../components/SEO"
+import { BusinessRatingFormat, FlexCenterBaseGrid, PageBackground, WeekdayHoursFormat } from "../helpers/resusable-styles"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
