@@ -4,7 +4,7 @@
 import { Grid, Typography } from "@material-ui/core"
 import { Satellite } from "@material-ui/icons"
 import { navigate } from "gatsby"
-import React, { Fragment } from "react"
+import React, { Fragment, useEffect } from "react"
 import styled from "styled-components"
 import AccessibleIcon from "../components/accessibleicon"
 import BusinessAddress from "../components/businessaddress"
@@ -49,19 +49,21 @@ const BusinessPageItemGrid = styled(FlexCenterBaseGrid)`
 // ---------------------------------------------------------------------------------- //
 
 const BusinessPage = props => {
-  if (!props.location.state && typeof window !== `undefined`) {
-    navigate("/")
-    return null
-  }
-  const data = props.location.state.data
-  // ? Test the object for nested arrays before defining
-  const isCurrentlyOpenBP = data.hours[0] ? data.hours[0].is_open_now : null
-  const currentBusinessHoursBP = data.hours[0] ? data.hours[0].open : null
-  // ? Test both nested objects for a value before defining it
-  const handicapAccessibleBP =
-    data.attributes && data.attributes.wheelchair_accessible
-      ? data.attributes.wheelchair_accessible.value_code
-      : null
+  useEffect(() => {
+    if (!props.location.state) {
+      navigate("/")
+      return null
+    }
+    const data = props.location.state.data
+    // ? Test the object for nested arrays before defining
+    const isCurrentlyOpenBP = data.hours[0] ? data.hours[0].is_open_now : null
+    const currentBusinessHoursBP = data.hours[0] ? data.hours[0].open : null
+    // ? Test both nested objects for a value before defining it
+    const handicapAccessibleBP =
+      data.attributes && data.attributes.wheelchair_accessible
+        ? data.attributes.wheelchair_accessible.value_code
+        : null  
+  })
 
   return (
     <Fragment>
