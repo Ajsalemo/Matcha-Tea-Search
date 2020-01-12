@@ -8,11 +8,13 @@ import { retrieveCurrentLocation } from "../helpers/helpers"
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const DirectionsText = styled.a`
+const DirectionsText = styled.button`
   display: flex;
   justify-content: flex-end;
   color: #fff;
   align-items: center;
+  background-color: inherit;
+  border: 0px;
   &:hover {
     cursor: pointer;
     text-decoration: underline;
