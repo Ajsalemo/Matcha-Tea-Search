@@ -4,6 +4,7 @@
 import gql from "graphql-tag"
 
 // ---------------------------------------------------------------------------------- //
+// ---------------------------------------------------------------------------------- //
 // ? This query is used as the primary way to retrieve search data
 export const LOCATION_SEARCH = gql`
   query LocationSearch($location: String!, $radius: Float!, $limit: Int!) {
@@ -64,6 +65,5 @@ export const LOCATION_SEARCH = gql`
     }
   }
 `
-
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //

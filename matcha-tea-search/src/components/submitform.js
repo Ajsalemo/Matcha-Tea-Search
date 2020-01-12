@@ -23,7 +23,10 @@ const TextfieldInput = styled(TextField)`
   width: 90%;
   background-color: #fff;
 `
-
+const PlaceholderSpan = styled.span`
+  color: #000;
+  font-size: 0.9em;
+`
 const SearchIcon = styled(Search)`
   &:hover {
     cursor: pointer;
@@ -59,7 +62,6 @@ const HomeLinkLargeScreen = styled(Link)`
     flex-direction: column;
   }
 `
-
 // ---------------------------------------------------------------------------------- //
 
 const SubmitFormValidationSchema = Yup.object().shape({
@@ -106,7 +108,7 @@ const SubmitForm = () => {
     >
       {({ values, handleChange, isSubmitting }) => (
         <Fragment>
-          <StyledForm>
+          <StyledForm id="top">
             {/* // * This 'Location' component is specifically from Gatsby itself. It gives the current pathname, amongst other location(url, path) details */}
             {/* // * If the current path is '/search-results', then render the home icon link. If the path is '/', which is the landing/home page. Do not render the icon */}
             <Location>
@@ -122,7 +124,9 @@ const SubmitForm = () => {
             <TextfieldInput
               name="search"
               id="search-for-location"
-              label="Search for locations"
+              label={
+                <PlaceholderSpan>Search for locations</PlaceholderSpan>
+              }
               placeholder="Ex. Charlotte, NC"
               margin="normal"
               variant="filled"
@@ -143,7 +147,11 @@ const SubmitForm = () => {
                     {isSubmitting ? (
                       <CircularProgress />
                     ) : (
-                      <SubmitButton type="submit" disabled={isSubmitting}>
+                      <SubmitButton
+                        type="submit"
+                        disabled={isSubmitting}
+                        aria-label="Submit form"
+                      >
                         <SearchIcon />
                       </SubmitButton>
                     )}

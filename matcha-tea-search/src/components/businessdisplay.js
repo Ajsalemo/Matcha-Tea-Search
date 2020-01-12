@@ -2,21 +2,22 @@
 // ---------------------------------------------------------------------------------- //
 
 import { Grid, Typography } from "@material-ui/core"
+import { Satellite } from "@material-ui/icons"
 import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import BusinessAddress from "../components/businessaddress"
-import { todaysBusinessHours, retrieveCurrentLocation } from "../helpers/helpers"
+import { todaysBusinessHours } from "../helpers/helpers"
 import {
+  BusinessRatingFormat,
   FlexDisplayColumn,
   WeekdayHoursFormat,
-  BusinessRatingFormat,
 } from "../helpers/resusable-styles"
 import AccessibleIcon from "./accessibleicon"
 import BusinessImage from "./businessimage"
 import BusinessTitle from "./businesstitle"
+import Directions from "./directions"
 import IsBusinessOpen from "./isbusinessopen"
-import { Satellite } from "@material-ui/icons"
 
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
@@ -28,7 +29,6 @@ const BusinessGrid = styled(Grid)`
   border-radius: 1em;
   padding: 0.7em;
 `
-
 const ImageAndDescriptionsGrid = styled(FlexDisplayColumn)`
   @media (min-width: 600px) {
     flex-direction: row;
@@ -40,15 +40,9 @@ const NestedBusinessGrid = styled(FlexDisplayColumn)`
 const DirectionsGrid = styled(FlexDisplayColumn)`
   justify-content: space-between;
 `
-const DirectionsText = styled.p`
-  display: flex;
-  justify-content: flex-end;
-  color: #fff;
-  align-items: center;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
+const BusinessPageLink = styled(Link)`
+  color: #92a3ff;
+  padding-left: 0.4em;
 `
 
 // ---------------------------------------------------------------------------------- //
@@ -74,12 +68,14 @@ const BusinessDisplay = ({ data }) => {
       <BusinessGrid item sm={12} md={12} lg={12} key={business.alias}>
         <ImageAndDescriptionsGrid item xs={10} sm={12} lg={10}>
           <Grid item xs={10} sm={10} lg={6}>
-            <BusinessImage
-              src={business.photos[0]}
-              alt={business.name}
-              key={business.id}
-              height={320}
-            />
+            <Link to="/business-page/" state={{ data: business }}>
+              <BusinessImage
+                src={business.photos[0]}
+                alt={business.name}
+                key={business.id}
+                height={320}
+              />
+            </Link>
           </Grid>
           <NestedBusinessGrid item xs={12} sm={12} lg={6}>
             {/* // ? - 'i + 1' is used as a numbered list, started from 1 - these numbers are also displayed on Google Maps to associate the businesses with the displayed markers */}
@@ -101,13 +97,9 @@ const BusinessDisplay = ({ data }) => {
             </BusinessRatingFormat>
             <BusinessRatingFormat>
               "{reviewExcerpt}"
-              <Link
-                to="/business-page/"
-                state={{ data: business }}
-                style={{ paddingLeft: "0.4em" }}
-              >
+              <BusinessPageLink to="/business-page/" state={{ data: business }}>
                 more
-              </Link>
+              </BusinessPageLink>
             </BusinessRatingFormat>
           </NestedBusinessGrid>
         </ImageAndDescriptionsGrid>
@@ -121,9 +113,15 @@ const BusinessDisplay = ({ data }) => {
             country={business.location.country}
             businessdisplay
           />
-          <DirectionsText onClick={() => retrieveCurrentLocation(business.coordinates.latitude, business.coordinates.longitude)}>
-            Directions <Satellite style={{ color: "#92a3ff" }}/>
-          </DirectionsText>
+          {/* // * This component consists of Google's Maps URL - depending on the device being used, this will pop open the Maps application if it's installed on the users device
+              // * If it isn't, it will open itself in the browser. Both implementations will give directions, the actual Maps application will give turn-by-turn directions
+          */}
+          <Directions
+            lat={business.coordinates.latitude}
+            lng={business.coordinates.longitude}
+          >
+            Directions <Satellite style={{ color: "#92a3ff" }} />
+          </Directions>
         </DirectionsGrid>
       </BusinessGrid>
     )
