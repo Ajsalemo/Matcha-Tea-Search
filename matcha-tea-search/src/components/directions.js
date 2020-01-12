@@ -8,7 +8,7 @@ import { retrieveCurrentLocation } from "../helpers/helpers"
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
 
-const DirectionsText = styled.p`
+const DirectionsText = styled.a`
   display: flex;
   justify-content: flex-end;
   color: #fff;
