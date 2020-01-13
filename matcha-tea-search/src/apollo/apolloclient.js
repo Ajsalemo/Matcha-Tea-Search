@@ -24,13 +24,13 @@ export const ApolloProviderHOC = props => {
     // Instantiate the client
     const client = new ApolloClient({
       cache,
-      uri: process.env.APOLLO_CLIENT_URI,
+      uri: process.env.GATSBY_APOLLO_CLIENT_URI,
       fetch,
       request: operation => {
         operation.setContext(context => ({
           headers: {
             ...context.headers,
-            Authorization: `Bearer ${process.env.YELP_API_KEY}`,
+            Authorization: `Bearer ${process.env.GATSBY_YELP_API_KEY}`,
             "Accept-Language": "en_US",
           },
         }))
