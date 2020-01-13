@@ -15,7 +15,8 @@ The returned results will display the businesses image, hours of businesses, ful
 ### Business pages
 <br>
 After choosing an image, business pages will return all the noted information above, plus 3 review excerpts from Yelp. At this time Yelp only gives excerpts, and not full text from reviews. 
-![Imgur](https://i.imgur.com/uRQRsgt.png)
+
+![Imgur](https://i.imgur.com/FmUDBfj.png)
 
 
 
