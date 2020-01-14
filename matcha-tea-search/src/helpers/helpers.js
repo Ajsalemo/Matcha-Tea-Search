@@ -39,27 +39,5 @@ export const todaysBusinessHours = hours => {
   return formattedWeekDayArray
 }
 
-export const retrieveCurrentLocation = (lat, lng) => {
-  // * If user allows the geolocation API to track them, then display their coordinates as the route origin 
-  const convertToMapURI = position => {
-    if (position.coords) {
-      window.open(`https://www.google.com/maps/dir/?api=1&origin=${position.coords.latitude},${position.coords.longitude}&destination=${lat},${lng}&dir_action=navigate`)
-    } 
-  }
-
-  // ! If user denies the request to track them via the geolocation API, but still clicks for directions
-  // ! Then open the Google Directions window without their coordinates as the route origin - this will still display the destination, but the user will manually have to enter their location
-  const onErrorCallback = () => {
-    window.open(`https://www.google.com/maps/dir/?api=1&origin=&destination=${lat},${lng}&dir_action=navigate`)
-  }
-
-  // * If geolocation is activated, pass either the coordinates into the location callback, or run the error callback if the request was denied
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(convertToMapURI, onErrorCallback)
-  } else {
-    console.log("Geolocation is not supported by this browser")
-  }
-}
-
 // ---------------------------------------------------------------------------------- //
 // ---------------------------------------------------------------------------------- //
