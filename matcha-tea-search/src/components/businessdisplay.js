@@ -73,7 +73,7 @@ const BusinessDisplay = ({ data }) => {
                 src={business.photos[0]}
                 alt={business.name}
                 key={business.id}
-                height={320}
+                height={"100%"}
               />
             </Link>
           </Grid>

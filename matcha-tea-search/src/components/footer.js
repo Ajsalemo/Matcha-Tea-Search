@@ -44,7 +44,7 @@ const FooterLink = styled(Link)`
   text-decoration: none;
 `
 const FooterLinkGrid = styled(Grid)`
-  width: 30%;
+  width: 50%;
   display: flex;
   justify-content: space-evenly;
   @media (min-width: 960px) {

@@ -13,6 +13,7 @@ const StyledLazyLoadImage = styled(LazyLoadImage)`
     border-radius: 0.5em;
     width: 100%;
     padding: 0em 0.2em;
+    height: auto;
     @media (min-wdith: 600px) {
       padding: 0em;
     }
