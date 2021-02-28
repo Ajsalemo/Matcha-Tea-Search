@@ -6,8 +6,7 @@ module.exports = {
   siteMetadata: {
     title: "Matcha Finder",
     titleTemplate: "Matcha Finder",
-    description:
-      "Find local Matcha options",
+    description: "Find local Matcha options",
     url: "http://localhost:8000", // Subject to change when in prod
   },
   plugins: [
@@ -20,14 +19,9 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          {
-            family: `Josefin Sans`,
-            variants: [`400`, `700`],
-          },
-        ],
+        fonts: [`Josefin Sans`, `400, 700`],
       },
     },
     {
